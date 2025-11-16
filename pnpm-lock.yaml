@@ -174,11 +174,11 @@ importers:
   packages/vite-react-18:
     dependencies:
       react:
-        specifier: ^19.0.0
-        version: 19.2.0
+        specifier: ^18.3.1
+        version: 18.3.1
       react-dom:
-        specifier: ^19.0.0
-        version: 19.2.0(react@19.2.0)
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
       ui:
         specifier: workspace:*
         version: link:../ui
