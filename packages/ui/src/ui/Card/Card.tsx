@@ -1,6 +1,7 @@
-import { css } from '@linaria/core';
-import React, { ReactNode, HTMLAttributes } from 'react';
-import { Button } from '../Button';
+import { css } from "@linaria/core";
+import type React from "react";
+import type { ReactNode, HTMLAttributes } from "react";
+import { Button } from "../Button";
 
 const card = css`
   background: white;
@@ -38,50 +39,72 @@ const cardFooter = css`
   border-top: 1px solid #e9ecef;
 `;
 
-type WithClassName<T = HTMLAttributes<HTMLDivElement>> = T & { className?: string };
+type WithClassName<T = HTMLAttributes<HTMLDivElement>> = T & {
+	className?: string;
+};
 
 const CardHeader: React.FC<WithClassName> = ({ className, ...props }) => (
-  <div className={[cardHeader, className].filter(Boolean).join(' ')} {...props} />
+	<div
+		className={[cardHeader, className].filter(Boolean).join(" ")}
+		{...props}
+	/>
 );
 
-const CardTitle: React.FC<WithClassName<HTMLAttributes<HTMLHeadingElement>>> = ({ className, ...props }) => (
-  <h3 className={[cardTitle, className].filter(Boolean).join(' ')} {...props} />
+const CardTitle: React.FC<
+	WithClassName<HTMLAttributes<HTMLHeadingElement>>
+> = ({ className, ...props }) => (
+	<h3 className={[cardTitle, className].filter(Boolean).join(" ")} {...props} />
 );
 
 const CardBody: React.FC<WithClassName> = ({ className, ...props }) => (
-  <div className={[cardBody, className].filter(Boolean).join(' ')} {...props} />
+	<div className={[cardBody, className].filter(Boolean).join(" ")} {...props} />
 );
 
 const CardFooter: React.FC<WithClassName> = ({ className, ...props }) => (
-  <div className={[cardFooter, className].filter(Boolean).join(' ')} {...props} />
+	<div
+		className={[cardFooter, className].filter(Boolean).join(" ")}
+		{...props}
+	/>
 );
 
-export interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
-  title?: ReactNode;
-  footer?: ReactNode;
-  children: ReactNode;
-  className?: string;
+export interface CardProps
+	extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
+	title?: ReactNode;
+	footer?: ReactNode;
+	children: ReactNode;
+	className?: string;
 }
 
 interface CardComponent extends React.FC<CardProps> {
-  Header: typeof CardHeader;
-  Title: typeof CardTitle;
-  Body: typeof CardBody;
-  Footer: typeof CardFooter;
+	Header: typeof CardHeader;
+	Title: typeof CardTitle;
+	Body: typeof CardBody;
+	Footer: typeof CardFooter;
 }
 
-export const Card: CardComponent = ({ title, children, footer, className, ...props }) => {
-  return (
-    <div className={[card, className].filter(Boolean).join(' ')} {...props}>
-      {title && (
-        <CardHeader>
-          <CardTitle>{title}</CardTitle>
-        </CardHeader>
-      )}
-      <CardBody>{children}</CardBody>
-      {footer && <CardFooter>{footer}<Button variant="primary">Confirm</Button></CardFooter>}
-    </div>
-  );
+export const Card: CardComponent = ({
+	title,
+	children,
+	footer,
+	className,
+	...props
+}) => {
+	return (
+		<div className={[card, className].filter(Boolean).join(" ")} {...props}>
+			{title && (
+				<CardHeader>
+					<CardTitle>{title}</CardTitle>
+				</CardHeader>
+			)}
+			<CardBody>{children}</CardBody>
+			{footer && (
+				<CardFooter>
+					{footer}
+					<Button variant="primary">Confirm</Button>
+				</CardFooter>
+			)}
+		</div>
+	);
 };
 
 Card.Header = CardHeader;

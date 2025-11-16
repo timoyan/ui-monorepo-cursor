@@ -1,0 +1,11 @@
+{
+	"name": "ui-monorepo",
+	"private": true,
+	"scripts": {
+		"lint": "biome lint .",
+		"format": "biome format ."
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4"
+	}
+}

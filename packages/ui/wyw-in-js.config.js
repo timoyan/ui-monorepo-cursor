@@ -1,5 +1,4 @@
 module.exports = {
-  evaluate: false,
-  displayName: true,
+	evaluate: false,
+	displayName: true,
 };
-
