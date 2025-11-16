@@ -3,10 +3,10 @@
 This repository is a small UI monorepo that contains:
 
 - **`packages/ui-react18`** – React component library (`Button`, `Card`) built with webpack 5, wyw‑in‑js, and extracted CSS.
-- **`packages/nextjs-14-app`** – Next.js 14 app using the shared UI package (React 18).
-- **`packages/nextjs-15-app`** – Next.js 15 app (App Router + React Compiler, React 19) using the shared UI package.
-- **`packages/vite-react-18`** – Vite + React 18 example using the UI package.
-- **`packages/vite-react-19`** – Vite + React 19 example using the UI package.
+- **`packages/nextjs14`** – Next.js 14 app using the shared UI package (React 18).
+- **`packages/nextjs15`** – Next.js 15 app (App Router + React Compiler, React 19) using the shared UI package.
+- **`packages/vite-react18`** – Vite + React 18 example using the UI package.
+- **`packages/vite-react19`** – Vite + React 19 example using the UI package.
 
 The UI package is shipped as ES modules, with React treated as an external dependency and styles emitted as real `.css` files.
 
@@ -44,10 +44,10 @@ pnpm -r build
 This builds:
 
 - `packages/ui-react18` (library bundle + CSS)
-- `packages/nextjs-14-app`
-- `packages/nextjs-15-app`
-- `packages/vite-react-18`
-- `packages/vite-react-19`
+- `packages/nextjs14`
+- `packages/nextjs15`
+- `packages/vite-react18`
+- `packages/vite-react19`
 
 ## Running the example apps
 
@@ -56,25 +56,25 @@ All commands are run from the repo root.
 - **Next.js 14 (React 18)**:
 
   ```bash
-  pnpm --filter nextjs-14-app dev
+  pnpm --filter nextjs14 dev
   ```
 
 - **Next.js 15 (React 19 + React Compiler)**:
 
   ```bash
-  pnpm --filter nextjs-15-app dev
+  pnpm --filter nextjs15 dev
   ```
 
 - **Vite + React 18**:
 
   ```bash
-  pnpm --filter vite-react-18 dev
+  pnpm --filter vite-react18 dev
   ```
 
 - **Vite + React 19**:
 
   ```bash
-  pnpm --filter vite-react-19 dev
+  pnpm --filter vite-react19 dev
   ```
 
 ## UI package (`packages/ui-react18`)
@@ -113,7 +113,7 @@ The `ui-react18` package exposes ESM entry points via `package.json`:
 - `ui-react18/Card` – `Card` component JS + types
 - `ui-react18/Card/style.css` – per‑component CSS
 - `ui-react18/main` – main entry JS
-- `ui-react18/main/style.css` – aggregated stylesheet (used by the Next.js 15 app)
+- `ui-react18/main/style.css` – aggregated stylesheet (used by the nextjs15 app)
 
 ### Using the UI package
 

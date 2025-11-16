@@ -18,7 +18,7 @@ importers:
         specifier: ^15.2.10
         version: 15.5.2
 
-  packages/nextjs-14-app:
+  packages/nextjs14:
     dependencies:
       next:
         specifier: ^14.2.0
@@ -43,7 +43,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
-  packages/nextjs-15-app:
+  packages/nextjs15:
     dependencies:
       next:
         specifier: ^15.0.0
@@ -186,7 +186,7 @@ importers:
         specifier: ^4.15.1
         version: 4.15.2(webpack-cli@5.1.4)(webpack@5.102.1)
 
-  packages/vite-react-18:
+  packages/vite-react18:
     dependencies:
       react:
         specifier: ^18.3.1
@@ -214,7 +214,7 @@ importers:
         specifier: ^5.4.10
         version: 5.4.21(@types/node@24.10.1)(terser@5.44.1)
 
-  packages/vite-react-19:
+  packages/vite-react19:
     dependencies:
       react:
         specifier: ^19.0.0
