@@ -1,96 +1,134 @@
-# React UI Library (ES Modules, zero‑runtime CSS)
+## UI Monorepo
 
-This repository contains a small React UI library built with:
-- wyw‑in‑js (Linaria toolchain) using the `css` API for fully static, zero‑runtime CSS
-- Webpack 5 with pure ES modules output
-- Storybook for local component development
+This repository is a small UI monorepo that contains:
 
-React is treated as an external dependency and is not bundled.
+- **`packages/ui`** – React component library (`Button`, `Card`) built with webpack 5, wyw‑in‑js, and extracted CSS.
+- **`packages/nextjs-14-app`** – Next.js 14 app using the shared UI package (React 18).
+- **`packages/nextjs-15-app`** – Next.js 15 app (App Router + React Compiler, React 19) using the shared UI package.
+- **`packages/vite-react-18`** – Vite + React 18 example using the UI package.
+- **`packages/vite-react-19`** – Vite + React 19 example using the UI package.
 
-## Project structure
-
-```
-ui/
-├── src/
-│   └── ui/
-│       ├── Button/
-│       │   ├── Button.jsx
-│       │   └── index.js
-│       ├── Card/
-│       │   ├── Card.jsx
-│       │   └── index.js
-│       └── index.js               # (optional) library barrel
-├── .storybook/                    # Storybook config
-├── webpack.config.js              # Custom Webpack build (no CRA)
-└── build/                         # Build artifacts (ESM JS + extracted CSS)
-    ├── Button/
-    │   ├── index.js
-    │   └── index.css
-    └── Card/
-        ├── index.js
-        └── index.css
-```
+The UI package is shipped as ES modules, with React treated as an external dependency and styles emitted as real `.css` files.
 
 ## Tech stack
 
-- **React** (external, not bundled)
-- **wyw‑in‑js** (`@wyw-in-js/webpack-loader`) with Linaria preset (`evaluate: false`) for static CSS extraction
-- **Webpack 5** (ES modules output, tree‑shakeable)
-- **MiniCssExtractPlugin** for emitting `.css` files per component
-- **Storybook** for component development
+- **React 18 / 19**
+- **Next.js 14 / 15**
+- **Vite 5**
+- **`packages/ui`**
+  - wyw‑in‑js (`@wyw-in-js/webpack-loader`) + `@linaria/core` for static, zero‑runtime CSS
+  - webpack 5 ES module output
+  - `MiniCssExtractPlugin` + custom `AggregateCssPlugin` that emits `main/main.css`
+  - Storybook 7 (`@storybook/react-webpack5`)
+- **Tooling**
+  - pnpm workspaces
+  - Biome (`@biomejs/biome`) for linting and formatting
 
-## Install
+## Getting started
 
-```bash
-npm install
-```
+### Install
 
-## Build
+From the repo root:
 
-```bash
-npm run build
-```
+pnpm install### Build all packages
 
-Outputs ESM JS and static CSS per component under `build/<Component>/`.
+pnpm -r buildThis builds:
 
-## Storybook
+- `packages/ui` (library bundle + CSS)
+- `packages/nextjs-14-app`
+- `packages/nextjs-15-app`
+- `packages/vite-react-18`
+- `packages/vite-react-19`
 
-```bash
-npm run storybook
-```
+## Running the example apps
 
-Runs Storybook at http://localhost:6006.
+All commands are run from the repo root.
 
-## Usage in external projects
+- **Next.js 14 (React 18)**
 
-Import only what you need (tree‑shakeable) and include the generated CSS:
+ 
+  pnpm --filter nextjs-14-app dev
+  - **Next.js 15 (React 19 + React Compiler)**
 
-```js
-// JS (ESM)
-import { Button } from 'your-lib/build/Button/index.js';
-// CSS
-import 'your-lib/build/Button/index.css';
-```
+ 
+  pnpm --filter nextjs-15-app dev
+  - **Vite + React 18**
 
-React (and `react/jsx-runtime`) are externals, so your host app must already depend on React.
+ 
+  pnpm --filter vite-react-18 dev
+  - **Vite + React 19**
 
-## Tree‑shaking
+ 
+  pnpm --filter vite-react-19 dev
+  ## UI package (`packages/ui`)
 
-- ESM output (`import`/`export`)
-- `package.json` has `"sideEffects": false`
-- Webpack `optimization.usedExports: true`
-- No common vendor chunks; each component is an independent entry
+### Structure (simplified)
+
+packages/ui/
+  src/ui/
+    Button/
+      Button.tsx
+      index.ts
+    Card/
+      Card.tsx
+      index.ts
+    index.ts
+  build/
+    Button/
+      index.js
+      index.css
+    Card/
+      index.js
+      index.css
+    main/
+      main.js
+      main.css      # aggregated CSS for all components### Exports
+
+The `ui` package exposes ESM entry points via `package.json`:
+
+- `ui` – main barrel (`build/main/main.js`)
+- `ui/Button` – `Button` component JS + types
+- `ui/Button/style.css` – per‑component CSS
+- `ui/Card` – `Card` component JS + types
+- `ui/Card/style.css` – per‑component CSS
+- `ui/main` – main entry JS
+- `ui/main/style.css` – aggregated stylesheet (used by the Next.js 15 app)
+
+### Using the UI package
+
+In a consumer app:
+
+import { Button, Card } from "ui";
+import "ui/main/style.css";Or per component:
+
+import { Button } from "ui/Button";
+import "ui/Button/style.css";React and `react-dom` are externals; the host app must provide them.
+
+## Storybook (UI package)
+
+From the repo root:
+
+pnpm --filter ui storybookThis runs Storybook for the shared UI components on port `6006`.
+
+## Linting & formatting (Biome)
+
+Biome is configured at the repo root in `biome.json`.
+
+- **Lint all**
+
+ 
+  pnpm lint
+  - **Format (check only)**
+
+ 
+  pnpm format
+  - **Format and write changes**
+
+ 
+  pnpm format -- --write
+  In Cursor / VS Code, Biome is configured as the default formatter for JS/TS/TSX with format‑on‑save enabled via `.vscode/settings.json`.
 
 ## Notes
 
-- This project does not include a CRA app or HTML page. It builds a consumable UI library only.
-- CSS is fully static (no runtime style injection). We use Linaria’s `css` API via wyw‑in‑js.
-
-## Add a new component
-
-1. Create a folder under `src/ui/<NewComponent>/`
-2. Add `<NewComponent>.jsx` and `index.js` (re‑export)
-3. Use `@linaria/core` `css` API for styles
-4. Optionally add a Storybook story under the same folder
-5. Rebuild with `npm run build`
-
+- Use `pnpm -r build` to build everything instead of running each package individually.
+- The `ui` library is designed to be tree‑shakeable and to ship only static CSS, with no runtime styling cost.
