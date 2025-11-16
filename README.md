@@ -1,101 +1,96 @@
-# React UI Library Project
+# React UI Library (ES Modules, zero‑runtime CSS)
 
-这是一个使用 React、Linaria 和 Storybook 构建的 UI 组件库项目。
+This repository contains a small React UI library built with:
+- wyw‑in‑js (Linaria toolchain) using the `css` API for fully static, zero‑runtime CSS
+- Webpack 5 with pure ES modules output
+- Storybook for local component development
 
-## 项目结构
+React is treated as an external dependency and is not bundled.
+
+## Project structure
 
 ```
 ui/
 ├── src/
-│   ├── ui/              # UI 组件库
-│   │   ├── Button/      # Button 组件
-│   │   ├── Card/        # Card 组件
-│   │   └── index.js     # 组件库入口
-│   ├── App.jsx          # React 应用主组件
-│   └── index.js         # 应用入口
-├── .storybook/          # Storybook 配置
-└── public/              # 静态文件
+│   └── ui/
+│       ├── Button/
+│       │   ├── Button.jsx
+│       │   └── index.js
+│       ├── Card/
+│       │   ├── Card.jsx
+│       │   └── index.js
+│       └── index.js               # (optional) library barrel
+├── .storybook/                    # Storybook config
+├── webpack.config.js              # Custom Webpack build (no CRA)
+└── build/                         # Build artifacts (ESM JS + extracted CSS)
+    ├── Button/
+    │   ├── index.js
+    │   └── index.css
+    └── Card/
+        ├── index.js
+        └── index.css
 ```
 
-## 技术栈
+## Tech stack
 
-- **React** - UI 框架
-- **Linaria** - CSS-in-JS，零运行时开销
-- **Storybook** - 组件开发和文档工具
-- **CRACO** - Create React App 配置覆盖工具，用于支持 Linaria
+- **React** (external, not bundled)
+- **wyw‑in‑js** (`@wyw-in-js/webpack-loader`) with Linaria preset (`evaluate: false`) for static CSS extraction
+- **Webpack 5** (ES modules output, tree‑shakeable)
+- **MiniCssExtractPlugin** for emitting `.css` files per component
+- **Storybook** for component development
 
-## 安装依赖
+## Install
 
 ```bash
 npm install
 ```
 
-## 运行应用
+## Build
 
 ```bash
-npm start
+npm run build
 ```
 
-应用将在 http://localhost:3000 启动
+Outputs ESM JS and static CSS per component under `build/<Component>/`.
 
-## 运行 Storybook
+## Storybook
 
 ```bash
 npm run storybook
 ```
 
-Storybook 将在 http://localhost:6006 启动
+Runs Storybook at http://localhost:6006.
 
-## 构建 Storybook
+## Usage in external projects
 
-```bash
-npm run build-storybook
+Import only what you need (tree‑shakeable) and include the generated CSS:
+
+```js
+// JS (ESM)
+import { Button } from 'your-lib/build/Button/index.js';
+// CSS
+import 'your-lib/build/Button/index.css';
 ```
 
-## UI 组件库
+React (and `react/jsx-runtime`) are externals, so your host app must already depend on React.
 
-所有 UI 组件位于 `src/ui/` 目录下，每个组件都包含：
-- 组件文件（.jsx）
-- Storybook stories（.stories.jsx）
-- 导出文件（index.js）
+## Tree‑shaking
 
-### 当前可用组件
+- ESM output (`import`/`export`)
+- `package.json` has `"sideEffects": false`
+- Webpack `optimization.usedExports: true`
+- No common vendor chunks; each component is an independent entry
 
-- **Button** - 按钮组件，支持多种变体（primary, secondary, success, danger）
-- **Card** - 卡片组件，支持标题、内容和页脚
+## Notes
 
-## Linaria 使用
+- This project does not include a CRA app or HTML page. It builds a consumable UI library only.
+- CSS is fully static (no runtime style injection). We use Linaria’s `css` API via wyw‑in‑js.
 
-所有组件的样式都使用 Linaria 的 `styled` API 编写，样式在构建时提取为 CSS，实现零运行时开销。
+## Add a new component
 
-```jsx
-import { styled } from '@linaria/react';
-
-const StyledButton = styled.button`
-  padding: 12px 24px;
-  background-color: #007bff;
-  color: white;
-`;
-```
-
-Linaria 配置通过以下方式实现：
-- **React 应用**: 使用 CRACO (`craco.config.js`) 覆盖 Create React App 配置，添加 Linaria Babel preset
-- **Storybook**: 在 `.storybook/main.js` 中配置 webpack 支持 Linaria
-
-由于 UI 组件库现在位于 `src/ui/` 目录下，react-scripts 会自动处理这些文件，无需额外的 webpack 配置。
-
-## 开发指南
-
-### 添加新组件
-
-1. 在 `src/ui/` 下创建新组件目录
-2. 创建组件文件（例如 `MyComponent.jsx`）
-3. 使用 Linaria 的 `styled` API 编写样式
-4. 创建 Storybook stories 文件（`MyComponent.stories.jsx`）
-5. 创建导出文件（`index.js`）
-6. 在 `src/ui/index.js` 中导出新组件
-
-### 组件示例
-
-查看 `src/ui/Button/` 和 `src/ui/Card/` 目录获取完整的组件实现示例。
+1. Create a folder under `src/ui/<NewComponent>/`
+2. Add `<NewComponent>.jsx` and `index.js` (re‑export)
+3. Use `@linaria/core` `css` API for styles
+4. Optionally add a Storybook story under the same folder
+5. Rebuild with `npm run build`
 
