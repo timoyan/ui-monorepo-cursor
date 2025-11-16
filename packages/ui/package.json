@@ -67,5 +67,17 @@
       "last 1 safari version"
     ]
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./build/main/main.js",
+      "default": "./build/main/main.js"
+    },
+    "./Button": "./build/Button/index.js",
+    "./Button/style.css": "./build/Button/index.css",
+    "./Card": "./build/Card/index.js",
+    "./Card/style.css": "./build/Card/index.css",
+    "./main": "./build/main/main.js",
+    "./main/style.css": "./build/main/main.css"
+  }
 }

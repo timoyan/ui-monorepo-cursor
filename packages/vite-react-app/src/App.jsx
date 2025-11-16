@@ -1,12 +1,13 @@
+import React from 'react';
 import { Button } from 'ui/Button';
 import 'ui/Button/style.css';
 import { Card } from 'ui/Card';
 import 'ui/Card/style.css';
 
-export default function Page() {
+export default function App() {
   return (
     <main style={{ padding: 24 }}>
-      <h1>Next.js 19 App using ui package</h1>
+      <h1> Vite React App using ui package </h1>
       <div style={{ display: 'flex', gap: 16, marginBottom: 24 }}>
         <Button variant="secondary">Secondary</Button>
         <Button variant="success">Success</Button>

@@ -1,8 +1,8 @@
 import Head from 'next/head';
-import { Button } from 'ui/build/Button/index.js';
-import 'ui/build/Button/index.css';
-import { Card } from 'ui/build/Card/index.js';
-import 'ui/build/Card/index.css';
+import { Button } from 'ui/Button';
+import 'ui/Button/style.css';
+import { Card } from 'ui/Card';
+import 'ui/Card/style.css';
 
 export default function Home() {
   return (

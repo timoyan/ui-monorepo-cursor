@@ -48,3 +48,6 @@ yarn-error.log*
 *.swo
 *~
 
+# Next.js build outputs
+packages/nextjs-18-app/.next/
+packages/nextjs-19-app/.next/
