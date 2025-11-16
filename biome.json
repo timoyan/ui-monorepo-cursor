@@ -13,8 +13,8 @@
 		"ignore": [
 			"node_modules/**",
 			"packages/*/node_modules/**",
-			"packages/ui/build/**",
-			"packages/ui/build-types/**",
+			"packages/ui-react18/build/**",
+			"packages/ui-react18/build-types/**",
 			"packages/*/.next/**",
 			"packages/*/dist/**"
 		]

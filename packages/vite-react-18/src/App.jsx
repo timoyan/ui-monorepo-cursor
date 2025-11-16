@@ -1,8 +1,8 @@
 import React from "react";
-import { Button } from "ui/Button";
-import "ui/Button/style.css";
-import { Card } from "ui/Card";
-import "ui/Card/style.css";
+import { Button } from "ui-react18/Button";
+import "ui-react18/Button/style.css";
+import { Card } from "ui-react18/Card";
+import "ui-react18/Card/style.css";
 
 export default function App() {
 	return (

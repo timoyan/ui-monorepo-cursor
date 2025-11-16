@@ -54,4 +54,5 @@ yarn-error.log*
 tsconfig.tsbuildinfo
 
 # Generated type declarations
-packages/ui/build-types/
+build-types/
+packages/*/build-types/
