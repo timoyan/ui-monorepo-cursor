@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const fs = require('fs');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env, argv) => {
@@ -62,34 +63,42 @@ module.exports = (env, argv) => {
     resolve: {
       extensions: ['.js', '.jsx', '.json'],
     },
-    externals: {
-      // For ES modules output, use module type externals
-      react: {
-        module: 'react',
-        commonjs: 'react',
-        commonjs2: 'react',
-        amd: 'react',
-        root: 'React',
+    externals: [
+      // React externals
+      {
+        react: 'react',
+        'react-dom': 'react-dom',
+        'react/jsx-runtime': 'react/jsx-runtime',
+        'react/jsx-dev-runtime': 'react/jsx-dev-runtime',
       },
-      'react-dom': {
-        module: 'react-dom',
-        commonjs: 'react-dom',
-        commonjs2: 'react-dom',
-        amd: 'react-dom',
-        root: 'ReactDOM',
+      // Cross-entry externalization: src/ui/<A> importing src/ui/<B> → rewrite to ../B/index.js
+      function ({ context, request }, callback) {
+        const uiRoot = path.resolve(__dirname, 'src/ui');
+        if (!context || !request) return callback();
+        const fromDir = path.normalize(context);
+        // Only handle relative imports inside src/ui/*
+        if (!fromDir.startsWith(uiRoot)) return callback();
+        if (!(request.startsWith('./') || request.startsWith('../'))) return callback();
+        const absTarget = path.normalize(path.resolve(fromDir, request));
+        if (!absTarget.startsWith(uiRoot)) return callback();
+        const fromComp = path.relative(uiRoot, fromDir).split(path.sep)[0];
+        const toComp = path.relative(uiRoot, absTarget).split(path.sep)[0];
+        if (!toComp || toComp === fromComp) return callback();
+        // Validate target component directory and its entry file
+        const toCompDir = path.join(uiRoot, toComp);
+        if (!fs.existsSync(toCompDir) || !fs.statSync(toCompDir).isDirectory()) {
+          return callback();
+        }
+        const toIndexJs = path.join(toCompDir, 'index.js');
+        const toIndexJsx = path.join(toCompDir, 'index.jsx');
+        if (!(fs.existsSync(toIndexJs) || fs.existsSync(toIndexJsx))) {
+          return callback();
+        }
+        // Externalize to sibling built entry
+        const rewritten = `../${toComp}/index.js`;
+        return callback(null, rewritten);
       },
-      // Externalize jsx-runtime for cleaner ES modules output
-      'react/jsx-runtime': {
-        module: 'react/jsx-runtime',
-        commonjs: 'react/jsx-runtime',
-        commonjs2: 'react/jsx-runtime',
-      },
-      'react/jsx-dev-runtime': {
-        module: 'react/jsx-dev-runtime',
-        commonjs: 'react/jsx-dev-runtime',
-        commonjs2: 'react/jsx-dev-runtime',
-      },
-    },
+    ],
     module: {
       rules: [
         {

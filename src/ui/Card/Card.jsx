@@ -1,5 +1,6 @@
 import { css } from '@linaria/core';
 import React from 'react';
+import { Button } from '../Button';
 
 const card = css`
   background: white;
@@ -62,7 +63,7 @@ export const Card = ({ title, children, footer, className, ...props }) => {
         </CardHeader>
       )}
       <CardBody>{children}</CardBody>
-      {footer && <CardFooter>{footer}</CardFooter>}
+      {footer && <CardFooter>{footer}<Button variant="primary">Confirm</Button></CardFooter>}
     </div>
   );
 };
