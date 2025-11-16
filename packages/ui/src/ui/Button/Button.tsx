@@ -1,5 +1,5 @@
 import { css } from '@linaria/core';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 const button = css`
   padding: 12px 24px;
@@ -55,7 +55,15 @@ const buttonDanger = css`
   }
 `;
 
-export const Button = ({ variant = 'primary', children, className, ...props }) => {
+export type ButtonVariant = 'primary' | 'secondary' | 'success' | 'danger';
+
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant;
+  children: ReactNode;
+  className?: string;
+}
+
+export const Button: React.FC<ButtonProps> = ({ variant = 'primary', children, className, ...props }) => {
   const variantClass = {
     primary: '',
     secondary: buttonSecondary,

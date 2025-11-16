@@ -24,6 +24,7 @@
     "@babel/plugin-transform-private-property-in-object": "^7.23.0",
     "@babel/preset-env": "^7.23.0",
     "@babel/preset-react": "^7.22.0",
+    "@babel/preset-typescript": "^7.28.5",
     "@linaria/babel-preset": "^5.0.4",
     "@storybook/test": "^7.6.0",
     "@types/react": "^18.2.0",
@@ -36,6 +37,7 @@
     "mini-css-extract-plugin": "^2.9.4",
     "storybook": "^7.6.0",
     "style-loader": "^3.3.3",
+    "typescript": "^5.9.3",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
@@ -45,7 +47,7 @@
   },
   "scripts": {
     "start": "webpack serve --mode development",
-    "build": "webpack --mode production",
+    "build": "webpack --mode production && tsc -p tsconfig.build.json",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -67,17 +69,28 @@
       "last 1 safari version"
     ]
   },
-  "sideEffects": false,
+  "sideEffects": true,
   "exports": {
     ".": {
+      "types": "./build-types/index.d.ts",
       "import": "./build/main/main.js",
       "default": "./build/main/main.js"
     },
-    "./Button": "./build/Button/index.js",
+    "./Button": {
+      "types": "./build-types/Button/index.d.ts",
+      "default": "./build/Button/index.js"
+    },
     "./Button/style.css": "./build/Button/index.css",
-    "./Card": "./build/Card/index.js",
+    "./Card": {
+      "types": "./build-types/Card/index.d.ts",
+      "default": "./build/Card/index.js"
+    },
     "./Card/style.css": "./build/Card/index.css",
-    "./main": "./build/main/main.js",
+    "./main": {
+      "types": "./build-types/index.d.ts",
+      "default": "./build/main/main.js"
+    },
     "./main/style.css": "./build/main/main.css"
-  }
+  },
+  "types": "./build-types/main/index.d.ts"
 }

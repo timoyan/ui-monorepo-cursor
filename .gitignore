@@ -51,3 +51,10 @@ yarn-error.log*
 # Next.js build outputs
 packages/nextjs-18-app/.next/
 packages/nextjs-19-app/.next/
+
+# TypeScript build info
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Generated type declarations
+packages/ui/build-types/

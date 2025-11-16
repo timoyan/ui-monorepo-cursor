@@ -3,6 +3,40 @@ const webpack = require('webpack');
 const fs = require('fs');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+class AggregateCssPlugin {
+  apply(compiler) {
+    compiler.hooks.thisCompilation.tap('AggregateCssPlugin', (compilation) => {
+      const { Compilation } = compiler.webpack;
+      const stage = Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL;
+      compilation.hooks.processAssets.tap(
+        { name: 'AggregateCssPlugin', stage },
+        (assets) => {
+          // Collect CSS from component entry assets
+          const sources = [];
+          const readAsset = (name) => {
+            const asset = compilation.getAsset(name);
+            return asset ? asset.source.source().toString() : '';
+          };
+          // Known component CSS outputs (no hashes per our config)
+          const candidates = ['Button/index.css', 'Card/index.css'];
+          for (const file of candidates) {
+            if (assets[file]) {
+              sources.push(readAsset(file));
+            }
+          }
+          const combined = sources.filter(Boolean).join('\n\n');
+          const outPath = 'main/main.css';
+          // Ensure directory asset exists by just emitting the file; webpack will handle dirs
+          compilation.emitAsset(
+            outPath,
+            new compiler.webpack.sources.RawSource(combined)
+          );
+        }
+      );
+    });
+  }
+}
+
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
 
@@ -13,9 +47,9 @@ module.exports = (env, argv) => {
     },
     // Create separate entry points for each component to make them independent
     entry: {
-      'Button/index': './src/ui/Button/index.js',
-      'Card/index': './src/ui/Card/index.js',
-      main: './src/ui/index.js', // Optional: main entry for all components
+      'Button/index': './src/ui/Button/index.ts',
+      'Card/index': './src/ui/Card/index.ts',
+      main: './src/ui/index.ts', // Optional: main entry for all components
     },
     output: {
       path: path.resolve(__dirname, 'build'),
@@ -29,7 +63,7 @@ module.exports = (env, argv) => {
       },
       filename: (pathData) => {
         const chunkName = pathData.chunk.name;
-        const hash = isProduction ? '.[contenthash:8]' : '';
+        const hash = '';
         
         // Handle entry points like 'Button/index' -> 'Button/index.js'
         if (chunkName && chunkName.includes('/')) {
@@ -43,25 +77,25 @@ module.exports = (env, argv) => {
         
         // Default structure for other chunks
         return isProduction
-          ? '[name].[contenthash:8].js'
+          ? '[name].js'
           : '[name].js';
       },
       chunkFilename: (pathData) => {
         const chunkName = pathData.chunk.name;
         if (chunkName && chunkName !== 'index' && chunkName !== 'vendor' && chunkName !== 'common') {
-          const hash = isProduction ? '.[contenthash:8]' : '';
+          const hash = '';
           return `${chunkName}/${chunkName}${hash}.chunk.js`;
         }
         return isProduction
-          ? '[name].[contenthash:8].chunk.js'
+          ? '[name].chunk.js'
           : '[name].chunk.js';
       },
-      assetModuleFilename: 'static/media/[name].[hash][ext]',
+      assetModuleFilename: 'static/media/[name][ext]',
       clean: true,
       publicPath: '/',
     },
     resolve: {
-      extensions: ['.js', '.jsx', '.json'],
+      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
     },
     externals: [
       // React externals
@@ -91,7 +125,9 @@ module.exports = (env, argv) => {
         }
         const toIndexJs = path.join(toCompDir, 'index.js');
         const toIndexJsx = path.join(toCompDir, 'index.jsx');
-        if (!(fs.existsSync(toIndexJs) || fs.existsSync(toIndexJsx))) {
+        const toIndexTs = path.join(toCompDir, 'index.ts');
+        const toIndexTsx = path.join(toCompDir, 'index.tsx');
+        if (!(fs.existsSync(toIndexJs) || fs.existsSync(toIndexJsx) || fs.existsSync(toIndexTs) || fs.existsSync(toIndexTsx))) {
           return callback();
         }
         // Externalize to sibling built entry
@@ -102,7 +138,7 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-          test: /\.(js|jsx)$/,
+          test: /\.(ts|tsx|js|jsx)$/,
           exclude: /node_modules/,
           use: [
             {
@@ -142,7 +178,7 @@ module.exports = (env, argv) => {
             new MiniCssExtractPlugin({
               filename: (pathData) => {
                 const chunkName = pathData.chunk.name;
-                const hash = isProduction ? '.[contenthash:8]' : '';
+                const hash = '';
                 
                 // Handle entry points like 'Button/index' -> 'Button/index.css'
                 if (chunkName && chunkName.includes('/')) {
@@ -156,12 +192,12 @@ module.exports = (env, argv) => {
                 
                 // Default structure for other chunks
                 return isProduction
-                  ? '[name].[contenthash:8].css'
+                  ? '[name].css'
                   : '[name].css';
               },
               chunkFilename: (pathData) => {
                 const chunkName = pathData.chunk.name;
-                const hash = isProduction ? '.[contenthash:8]' : '';
+                const hash = '';
                 
                 // Handle entry points like 'Button/index' -> 'Button/index.css'
                 if (chunkName && chunkName.includes('/')) {
@@ -172,11 +208,12 @@ module.exports = (env, argv) => {
                   return `${chunkName}/${chunkName}${hash}.css`;
                 }
                 return isProduction
-                  ? '[name].[contenthash:8].css'
+                  ? '[name].css'
                   : '[name].css';
               },
               ignoreOrder: true,
             }),
+            new AggregateCssPlugin(),
             // Force source map generation for all chunks, including small empty chunks
             new webpack.SourceMapDevToolPlugin({
               filename: '[file].map',

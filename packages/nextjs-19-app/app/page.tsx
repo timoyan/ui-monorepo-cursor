@@ -1,6 +1,5 @@
-import { Button } from 'ui/Button';
+import { Button, Card } from 'ui';
 import 'ui/Button/style.css';
-import { Card } from 'ui/Card';
 import 'ui/Card/style.css';
 
 export default function Page() {
