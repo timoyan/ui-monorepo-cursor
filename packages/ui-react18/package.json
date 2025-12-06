@@ -48,7 +48,8 @@
 	},
 	"overrides": {
 		"@babel/plugin-proposal-private-property-in-object": "npm:@babel/plugin-transform-private-property-in-object@^7.23.0",
-		"happy-dom": ">=20.0.2"
+		"happy-dom": ">=20.0.2",
+		"esbuild": ">=0.25.0"
 	},
 	"scripts": {
 		"build": "webpack --mode production && tsc -p tsconfig.build.json",
