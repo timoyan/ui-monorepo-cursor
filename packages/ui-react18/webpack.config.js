@@ -17,7 +17,11 @@ class AggregateCssPlugin {
 						const asset = compilation.getAsset(name);
 						return asset ? asset.source.source().toString() : "";
 					};
-					const candidates = ["Button/index.css", "Card/index.css"];
+					const candidates = [
+						"Button/index.css",
+						"Card/index.css",
+						"Modal/index.css",
+					];
 					for (const file of candidates) {
 						if (assets[file]) {
 							sources.push(readAsset(file));
@@ -46,6 +50,7 @@ module.exports = (env, argv) => {
 		entry: {
 			"Button/index": "./src/ui/Button/index.ts",
 			"Card/index": "./src/ui/Card/index.ts",
+			"Modal/index": "./src/ui/Modal/index.ts",
 			main: "./src/ui/index.ts", // Optional: main entry for all components
 		},
 		output: {
@@ -153,7 +158,12 @@ module.exports = (env, argv) => {
 			rules: [
 				{
 					test: /\.(ts|tsx|js|jsx)$/,
-					exclude: /node_modules/,
+					exclude: [
+						/node_modules/,
+						/\.test\.(ts|tsx|js|jsx)$/,
+						/\.spec\.(ts|tsx|js|jsx)$/,
+						/test-setup\.(ts|tsx|js|jsx)$/,
+					],
 					use: [
 						{
 							loader: "babel-loader",
