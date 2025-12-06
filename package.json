@@ -26,7 +26,8 @@
 	},
 	"pnpm": {
 		"overrides": {
-			"happy-dom": ">=20.0.2"
+			"happy-dom": ">=20.0.2",
+			"glob": ">=10.5.0"
 		}
 	}
 }
