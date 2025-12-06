@@ -1,5 +1,5 @@
-import { Button, Card } from "ui-react18";
-import "ui-react18/main/style.css";
+import { Button, Card } from "ui-react19";
+import "ui-react19/main/style.css";
 
 export default function Page() {
 	return (
