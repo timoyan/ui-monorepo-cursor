@@ -38,20 +38,20 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build nextjs14
-        working-directory: packages/nextjs14
-        run: pnpm build
-
-      - name: Build nextjs15
-        working-directory: packages/nextjs15
-        run: pnpm build
-
       - name: Build ui-react18
         working-directory: packages/ui-react18
         run: pnpm build
 
       - name: Build ui-react19
         working-directory: packages/ui-react19
+        run: pnpm build
+
+      - name: Build nextjs14
+        working-directory: packages/nextjs14
+        run: pnpm build
+
+      - name: Build nextjs15
+        working-directory: packages/nextjs15
         run: pnpm build
 
       - name: Build vite-react18
