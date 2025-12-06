@@ -46,9 +46,6 @@
 		"react": ">=19.0.0",
 		"react-dom": ">=19.0.0"
 	},
-	"overrides": {
-		"@babel/plugin-proposal-private-property-in-object": "npm:@babel/plugin-transform-private-property-in-object@^7.23.0"
-	},
 	"scripts": {
 		"build": "webpack --mode production && tsc -p tsconfig.build.json",
 		"storybook": "storybook dev -p 6006",
