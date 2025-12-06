@@ -158,3 +158,94 @@ All instances should show version >= 10.5.0 (or >= 11.1.0 if using v11.x).
 
 2025-12-07
 
+---
+
+## GHSA-67mh-4wv8-2f99: esbuild Development Server CORS Vulnerability
+
+### Summary
+
+The `esbuild` package development server allows any websites to send any request to the development server and read the response due to default CORS settings. This enables attackers to steal source code from development servers.
+
+### Vulnerability Details
+
+- **Advisory ID**: GHSA-67mh-4wv8-2f99
+- **Severity**: Moderate
+- **CVSS Score**: 5.3 (CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:N/A:N)
+- **Affected Versions**: `esbuild` <=0.24.2
+- **Fixed Versions**: `esbuild@0.25.0` or higher
+- **Component**: Development server only (production builds are not affected)
+
+### Impact
+
+This vulnerability allows attackers to:
+- Send requests to the esbuild development server from any website
+- Read responses from the development server, including:
+  - Compiled JavaScript/CSS files
+  - Source maps (if enabled)
+  - Directory listings
+  - File change notifications via SSE endpoint
+
+**Attack Scenario:**
+1. Attacker serves a malicious web page
+2. User accesses the malicious page while running an esbuild dev server
+3. Malicious page uses `fetch()` to request files from `http://127.0.0.1:8000/` (or other dev server port)
+4. Due to `Access-Control-Allow-Origin: *` header, the request succeeds
+5. Attacker can steal source code and compiled assets
+
+### Current Status
+
+✅ **RESOLVED** - All instances of `esbuild` have been upgraded to safe versions.
+
+The project uses `esbuild` as a transitive dependency via:
+- `vite` → `esbuild`
+- `@storybook/addon-essentials` → `@storybook/core-common` → `esbuild`
+
+Previously, vulnerable versions (<=0.24.2) could be pulled in, including:
+- `esbuild@0.21.5` (via vite)
+- `esbuild@0.18.20` (via @storybook/core-common)
+
+**This has been fixed** via pnpm override - all instances now use `esbuild@0.27.1` (or higher).
+
+### Mitigation
+
+✅ **pnpm override added** - The root `package.json` includes an override to force all `esbuild` versions to `>=0.25.0`:
+
+```json
+{
+  "pnpm": {
+    "overrides": {
+      "esbuild": ">=0.25.0"
+    }
+  }
+}
+```
+
+**To apply the override:**
+```bash
+pnpm install
+```
+
+This will ensure that even transitive dependencies will use a safe version of `esbuild`.
+
+**Verify the fix:**
+```bash
+pnpm why esbuild
+```
+
+All instances should show version >= 0.25.0.
+
+### Important Notes
+
+- **Development Server Only**: This vulnerability affects only the development server feature (`esbuild serve`)
+- **Production Safe**: Production builds using `esbuild.build()` are **not affected**
+- **Best Practice**: Never run development servers on untrusted networks or expose them publicly
+
+### References
+
+- [GitHub Advisory: GHSA-67mh-4wv8-2f99](https://github.com/advisories/GHSA-67mh-4wv8-2f99)
+- [esbuild Security Fix Commit](https://github.com/evanw/esbuild/commit/de85afd65edec9ebc44a11e245fd9e9a2e99760d)
+
+### Last Updated
+
+2025-02-10
+
