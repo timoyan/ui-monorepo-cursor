@@ -23,5 +23,10 @@
 			"biome format --write --no-errors-on-unmatched",
 			"biome lint --write --unsafe --no-errors-on-unmatched"
 		]
+	},
+	"pnpm": {
+		"overrides": {
+			"happy-dom": ">=15.10.2"
+		}
 	}
 }
