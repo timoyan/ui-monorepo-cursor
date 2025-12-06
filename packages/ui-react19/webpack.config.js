@@ -237,16 +237,7 @@ module.exports = (env, argv) => {
 					]
 				: []),
 		],
-		devServer: {
-			static: {
-				directory: path.join(__dirname, "public"),
-			},
-			compress: true,
-			port: 3001,
-			hot: true,
-			historyApiFallback: true,
-			open: true,
-		},
+
 		// Generate source maps for both production and development
 		// Production: separate .map files for better debugging
 		// Development: inline source maps for faster builds
