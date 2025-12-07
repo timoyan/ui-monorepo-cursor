@@ -28,6 +28,8 @@ jobs:
           ${{ runner.os }}-pnpm-
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
+    - name: Build ui-react18
+      run: cd packages/ui-react18 && pnpm build
     - name: Install Playwright browsers
       run: pnpm exec playwright install --with-deps
     - name: Run Playwright tests
