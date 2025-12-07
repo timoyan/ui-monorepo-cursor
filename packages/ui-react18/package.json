@@ -91,6 +91,11 @@
 			"default": "./build/Modal/index.js"
 		},
 		"./Modal/style.css": "./build/Modal/index.css",
+		"./Toast": {
+			"types": "./build-types/Toast/index.d.ts",
+			"default": "./build/Toast/index.js"
+		},
+		"./Toast/style.css": "./build/Toast/index.css",
 		"./main": {
 			"types": "./build-types/index.d.ts",
 			"default": "./build/main/main.js"

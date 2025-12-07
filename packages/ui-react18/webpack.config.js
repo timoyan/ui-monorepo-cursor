@@ -21,6 +21,7 @@ class AggregateCssPlugin {
 						"Button/index.css",
 						"Card/index.css",
 						"Modal/index.css",
+						"Toast/index.css",
 					];
 					for (const file of candidates) {
 						if (assets[file]) {
@@ -51,6 +52,7 @@ module.exports = (env, argv) => {
 			"Button/index": "./src/ui/Button/index.ts",
 			"Card/index": "./src/ui/Card/index.ts",
 			"Modal/index": "./src/ui/Modal/index.ts",
+			"Toast/index": "./src/ui/Toast/index.ts",
 			main: "./src/ui/index.ts", // Optional: main entry for all components
 		},
 		output: {
