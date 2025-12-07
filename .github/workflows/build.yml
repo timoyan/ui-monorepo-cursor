@@ -11,7 +11,8 @@ jobs:
     name: Build All Packages
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    
+    permissions:
+      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
