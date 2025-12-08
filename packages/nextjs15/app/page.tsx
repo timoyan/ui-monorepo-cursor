@@ -4,7 +4,7 @@ import "ui-react19/main/style.css";
 export default function Page() {
 	return (
 		<main style={{ padding: 24 }}>
-			<h1>Next.js 19 App using ui package</h1>
+			<h1>Next.js 15 App using ui package</h1>
 			<div style={{ display: "flex", gap: 16, marginBottom: 24 }}>
 				<Button variant="secondary">Secondary</Button>
 				<Button variant="success">Success</Button>

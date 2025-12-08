@@ -11,7 +11,7 @@ test.describe("Next.js 15 App", () => {
 
 	test("should display the main heading", async ({ page }) => {
 		await expect(
-			page.getByRole("heading", { name: "Next.js 19 App using ui package" }),
+			page.getByRole("heading", { name: "Next.js 15 App using ui package" }),
 		).toBeVisible();
 	});
 });

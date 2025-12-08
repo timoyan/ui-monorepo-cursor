@@ -15,10 +15,10 @@ export default function Home() {
 	return (
 		<>
 			<Head>
-				<title>Next.js 18 App</title>
+				<title>Next.js 14 App</title>
 			</Head>
 			<main style={{ padding: 24 }}>
-				<h1>Next.js 18 App using ui package</h1>
+				<h1>Next.js 14 App using ui package</h1>
 				<div
 					style={{
 						display: "flex",
