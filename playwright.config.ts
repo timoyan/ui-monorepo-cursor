@@ -31,7 +31,7 @@ export default defineConfig({
 				...devices["Desktop Chrome"],
 				baseURL: "http://localhost:3000",
 			},
-			testMatch: "**/nextjs14.spec.ts",
+			testMatch: "**/nextjs14/**/*.spec.ts",
 		},
 		{
 			name: "nextjs14-firefox",
@@ -39,7 +39,7 @@ export default defineConfig({
 				...devices["Desktop Firefox"],
 				baseURL: "http://localhost:3000",
 			},
-			testMatch: "**/nextjs14.spec.ts",
+			testMatch: "**/nextjs14/**/*.spec.ts",
 		},
 		{
 			name: "nextjs14-webkit",
@@ -47,7 +47,7 @@ export default defineConfig({
 				...devices["Desktop Safari"],
 				baseURL: "http://localhost:3000",
 			},
-			testMatch: "**/nextjs14.spec.ts",
+			testMatch: "**/nextjs14/**/*.spec.ts",
 		},
 
 		/* Next.js 15 Tests */
@@ -57,7 +57,7 @@ export default defineConfig({
 				...devices["Desktop Chrome"],
 				baseURL: "http://localhost:3001",
 			},
-			testMatch: "**/nextjs15.spec.ts",
+			testMatch: "**/nextjs15/**/*.spec.ts",
 		},
 		{
 			name: "nextjs15-firefox",
@@ -65,7 +65,7 @@ export default defineConfig({
 				...devices["Desktop Firefox"],
 				baseURL: "http://localhost:3001",
 			},
-			testMatch: "**/nextjs15.spec.ts",
+			testMatch: "**/nextjs15/**/*.spec.ts",
 		},
 		{
 			name: "nextjs15-webkit",
@@ -73,7 +73,7 @@ export default defineConfig({
 				...devices["Desktop Safari"],
 				baseURL: "http://localhost:3001",
 			},
-			testMatch: "**/nextjs15.spec.ts",
+			testMatch: "**/nextjs15/**/*.spec.ts",
 		},
 
 		/* Vite React 18 Tests */
@@ -83,7 +83,7 @@ export default defineConfig({
 				...devices["Desktop Chrome"],
 				baseURL: "http://localhost:5173",
 			},
-			testMatch: "**/vite-react18.spec.ts",
+			testMatch: "**/vite-react18/**/*.spec.ts",
 		},
 		{
 			name: "vite-react18-firefox",
@@ -91,7 +91,7 @@ export default defineConfig({
 				...devices["Desktop Firefox"],
 				baseURL: "http://localhost:5173",
 			},
-			testMatch: "**/vite-react18.spec.ts",
+			testMatch: "**/vite-react18/**/*.spec.ts",
 		},
 		{
 			name: "vite-react18-webkit",
@@ -99,7 +99,7 @@ export default defineConfig({
 				...devices["Desktop Safari"],
 				baseURL: "http://localhost:5173",
 			},
-			testMatch: "**/vite-react18.spec.ts",
+			testMatch: "**/vite-react18/**/*.spec.ts",
 		},
 
 		/* Vite React 19 Tests */
@@ -109,7 +109,7 @@ export default defineConfig({
 				...devices["Desktop Chrome"],
 				baseURL: "http://localhost:5174",
 			},
-			testMatch: "**/vite-react19.spec.ts",
+			testMatch: "**/vite-react19/**/*.spec.ts",
 		},
 		{
 			name: "vite-react19-firefox",
@@ -117,7 +117,7 @@ export default defineConfig({
 				...devices["Desktop Firefox"],
 				baseURL: "http://localhost:5174",
 			},
-			testMatch: "**/vite-react19.spec.ts",
+			testMatch: "**/vite-react19/**/*.spec.ts",
 		},
 		{
 			name: "vite-react19-webkit",
@@ -125,7 +125,7 @@ export default defineConfig({
 				...devices["Desktop Safari"],
 				baseURL: "http://localhost:5174",
 			},
-			testMatch: "**/vite-react19.spec.ts",
+			testMatch: "**/vite-react19/**/*.spec.ts",
 		},
 
 		/* Test against mobile viewports. */
