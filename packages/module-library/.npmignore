@@ -1,0 +1,33 @@
+# 源碼（不需要發佈）
+src/
+test/
+*.spec.ts
+*.test.ts
+*.spec.tsx
+*.test.tsx
+
+# 開發工具
+.storybook/
+.vscode/
+.idea/
+
+# 構建工具
+stencil.config.ts
+tsconfig.json
+test-server.js
+
+# 文檔（可選，如果不想發佈）
+PLAN.md
+CSS_BUNDLE_STRATEGY.md
+BUILD_TOOL_CONFIG.md
+RELEASE.md
+
+# Git
+.git/
+.gitignore
+
+# 其他
+node_modules/
+*.log
+.DS_Store
+

@@ -1,0 +1,27 @@
+# Stencil
+dist/
+loader/
+www/
+
+# React output
+react/
+
+# Node
+node_modules/
+
+# TypeScript
+*.tsbuildinfo
+
+# Testing
+coverage/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+

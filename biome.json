@@ -18,7 +18,8 @@
 			"packages/ui-react19/build/**",
 			"packages/ui-react19/build-types/**",
 			"packages/*/.next/**",
-			"packages/*/dist/**"
+			"packages/*/dist/**",
+			"packages/module-library/src/components.d.ts"
 		]
 	}
 }

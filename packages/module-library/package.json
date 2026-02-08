@@ -1,0 +1,71 @@
+{
+	"name": "module-library",
+	"version": "0.1.0",
+	"private": true,
+	"sideEffects": false,
+	"scripts": {
+		"build": "stencil build && node scripts/fix-react-ssr.js",
+		"build:dev": "stencil build --dev && node scripts/fix-react-ssr.js",
+		"build:watch": "stencil build --watch",
+		"build:prod": "stencil build --prod && node scripts/fix-react-ssr.js",
+		"test": "stencil test",
+		"test:watch": "stencil test --watch",
+		"test:serve": "node test-server.js",
+		"generate": "stencil generate",
+		"version:patch": "pnpm version patch && pnpm build",
+		"version:minor": "pnpm version minor && pnpm build",
+		"version:major": "pnpm version major && pnpm build",
+		"prepublishOnly": "pnpm build",
+		"release": "pnpm build && pnpm publish --access public"
+	},
+	"dependencies": {
+		"@zag-js/core": "^1.0.0",
+		"@zag-js/dialog": "^1.0.0",
+		"@zag-js/menu": "^1.0.0",
+		"@zag-js/select": "^1.0.0",
+		"@zag-js/accordion": "^1.0.0"
+	},
+	"devDependencies": {
+		"@stencil/core": "^4.0.0",
+		"@stencil/react-output-target": "^0.5.0",
+		"@types/node": "^20.0.0",
+		"@types/jest": "^29.5.0",
+		"typescript": "^5.9.3"
+	},
+	"main": "./dist/index.cjs.js",
+	"module": "./dist/index.js",
+	"collection": "./dist/collection/collection-manifest.json",
+	"types": "./dist/types/index.d.ts",
+	"peerDependencies": {
+		"@adyen/adyen-web": ">=6.0.0",
+		"@zag-js/core": "^1.0.0"
+	},
+	"exports": {
+		".": {
+			"types": "./dist/types/index.d.ts",
+			"import": "./dist/index.js",
+			"default": "./dist/index.js"
+		},
+		"./loader": {
+			"import": "./dist/esm/loader.js",
+			"default": "./dist/esm/loader.js"
+		},
+		"./react": {
+			"types": "./react/react-component-lib/components.d.ts",
+			"import": "./react/react-component-lib/components.tsx",
+			"default": "./react/react-component-lib/components.tsx"
+		},
+		"./css": {
+			"default": "./dist/module-library.css"
+		},
+		"./components/my-button": {
+			"types": "./dist/types/components/my-button/my-button.d.ts",
+			"import": "./dist/components/my-button/my-button.js",
+			"default": "./dist/components/my-button/my-button.js"
+		},
+		"./components/my-button/css": {
+			"default": "./dist/collection/components/my-button/my-button.css"
+		}
+	},
+	"files": ["dist/", "react/", "loader/"]
+}

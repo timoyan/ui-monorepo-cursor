@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Module Library - 組件測試</title>
+	<style>
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+			padding: 40px;
+			background: #f5f5f5;
+		}
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+			background: white;
+			padding: 40px;
+			border-radius: 8px;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+		}
+		h1 {
+			margin-top: 0;
+			color: #333;
+		}
+		.section {
+			margin-bottom: 40px;
+			padding-bottom: 30px;
+			border-bottom: 1px solid #eee;
+		}
+		.section:last-child {
+			border-bottom: none;
+		}
+		.section h2 {
+			color: #666;
+			margin-bottom: 20px;
+		}
+		.button-group {
+			display: flex;
+			gap: 16px;
+			flex-wrap: wrap;
+			margin-bottom: 20px;
+		}
+		.code {
+			background: #f8f8f8;
+			padding: 12px;
+			border-radius: 4px;
+			font-family: 'Courier New', monospace;
+			font-size: 14px;
+			margin-top: 10px;
+		}
+	</style>
+	<!-- 載入組件 CSS -->
+	<link rel="stylesheet" href="/dist/collection/components/my-button/my-button.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Module Library - 組件測試</h1>
+
+		<div class="section">
+			<h2>1. 基本按鈕</h2>
+			<div class="button-group">
+				<my-button>預設按鈕</my-button>
+				<my-button variant="primary">Primary</my-button>
+				<my-button variant="secondary">Secondary</my-button>
+				<my-button variant="success">Success</my-button>
+				<my-button variant="danger">Danger</my-button>
+			</div>
+			<div class="code">
+				&lt;my-button&gt;預設按鈕&lt;/my-button&gt;<br>
+				&lt;my-button variant="primary"&gt;Primary&lt;/my-button&gt;
+			</div>
+		</div>
+
+		<div class="section">
+			<h2>2. 不同尺寸</h2>
+			<div class="button-group">
+				<my-button size="sm" variant="primary">Small</my-button>
+				<my-button size="md" variant="primary">Medium</my-button>
+				<my-button size="lg" variant="primary">Large</my-button>
+			</div>
+			<div class="code">
+				&lt;my-button size="sm"&gt;Small&lt;/my-button&gt;<br>
+				&lt;my-button size="md"&gt;Medium&lt;/my-button&gt;<br>
+				&lt;my-button size="lg"&gt;Large&lt;/my-button&gt;
+			</div>
+		</div>
+
+		<div class="section">
+			<h2>3. 禁用狀態</h2>
+			<div class="button-group">
+				<my-button disabled>Disabled</my-button>
+				<my-button variant="primary" disabled>Disabled Primary</my-button>
+			</div>
+			<div class="code">
+				&lt;my-button disabled&gt;Disabled&lt;/my-button&gt;
+			</div>
+		</div>
+
+		<div class="section">
+			<h2>4. 事件處理</h2>
+			<div class="button-group">
+				<my-button id="clickable-btn" variant="primary">點擊我</my-button>
+			</div>
+			<div id="event-log" style="margin-top: 10px; padding: 10px; background: #f0f0f0; border-radius: 4px; min-height: 40px;">
+				事件日誌將顯示在這裡...
+			</div>
+			<div class="code">
+				const btn = document.getElementById('clickable-btn');<br>
+				btn.addEventListener('buttonClick', (e) => {<br>
+				&nbsp;&nbsp;console.log('Button clicked!', e);<br>
+				});
+			</div>
+		</div>
+
+		<div class="section">
+			<h2>5. 主題定制</h2>
+			<div class="button-group">
+				<my-button class="custom-theme">自定義主題</my-button>
+			</div>
+			<style>
+				.custom-theme {
+					--button-primary-bg: #9b59b6;
+					--button-primary-hover: #8e44ad;
+				}
+			</style>
+			<div class="code">
+				&lt;style&gt;<br>
+				&nbsp;&nbsp;.custom-theme {<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;--button-primary-bg: #9b59b6;<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;--button-primary-hover: #8e44ad;<br>
+				&nbsp;&nbsp;}<br>
+				&lt;/style&gt;
+			</div>
+		</div>
+	</div>
+
+	<!-- 載入組件 JavaScript -->
+	<script type="module">
+		// 使用 loader 載入組件
+		import { defineCustomElements } from '/dist/esm/loader.js';
+		
+		// 定義自定義元素
+		defineCustomElements();
+
+		// 事件處理測試
+		const clickableBtn = document.getElementById('clickable-btn');
+		const eventLog = document.getElementById('event-log');
+		
+		clickableBtn.addEventListener('buttonClick', (event) => {
+			const timestamp = new Date().toLocaleTimeString();
+			eventLog.innerHTML = `[${timestamp}] 按鈕被點擊了！<br>事件對象: ${JSON.stringify({
+				type: event.type,
+				target: event.target.tagName
+			}, null, 2)}`;
+			console.log('Button clicked!', event);
+		});
+
+		console.log('Module Library 組件已載入！');
+	</script>
+</body>
+</html>
+

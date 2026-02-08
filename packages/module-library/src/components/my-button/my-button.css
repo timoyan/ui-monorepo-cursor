@@ -1,0 +1,115 @@
+/* Scoped CSS - 類名會自動添加作用域 */
+:host {
+	--button-primary-bg: #007bff;
+	--button-primary-hover: #0056b3;
+	--button-primary-text: #ffffff;
+
+	--button-secondary-bg: #6c757d;
+	--button-secondary-hover: #545b62;
+	--button-secondary-text: #ffffff;
+
+	--button-success-bg: #28a745;
+	--button-success-hover: #218838;
+	--button-success-text: #ffffff;
+
+	--button-danger-bg: #dc3545;
+	--button-danger-hover: #c82333;
+	--button-danger-text: #ffffff;
+
+	--button-padding-sm: 8px 16px;
+	--button-padding-md: 12px 24px;
+	--button-padding-lg: 16px 32px;
+
+	--button-font-size-sm: 14px;
+	--button-font-size-md: 16px;
+	--button-font-size-lg: 18px;
+
+	--button-border-radius: 6px;
+	--button-transition: all 0.2s ease;
+
+	display: inline-block;
+}
+
+.btn {
+	padding: var(--button-padding-md);
+	font-size: var(--button-font-size-md);
+	font-weight: 600;
+	border: none;
+	border-radius: var(--button-border-radius);
+	cursor: pointer;
+	transition: var(--button-transition);
+	color: white;
+	background-color: var(--button-primary-bg);
+}
+
+.btn:hover:not(:disabled) {
+	background-color: var(--button-primary-hover);
+	transform: translateY(-1px);
+	box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.btn:active:not(:disabled) {
+	transform: translateY(0);
+}
+
+.btn:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+/* Variant 樣式 */
+.btn-primary {
+	background-color: var(--button-primary-bg);
+	color: var(--button-primary-text);
+}
+
+.btn-primary:hover:not(:disabled) {
+	background-color: var(--button-primary-hover);
+	box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.btn-secondary {
+	background-color: var(--button-secondary-bg);
+	color: var(--button-secondary-text);
+}
+
+.btn-secondary:hover:not(:disabled) {
+	background-color: var(--button-secondary-hover);
+	box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+.btn-success {
+	background-color: var(--button-success-bg);
+	color: var(--button-success-text);
+}
+
+.btn-success:hover:not(:disabled) {
+	background-color: var(--button-success-hover);
+	box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+.btn-danger {
+	background-color: var(--button-danger-bg);
+	color: var(--button-danger-text);
+}
+
+.btn-danger:hover:not(:disabled) {
+	background-color: var(--button-danger-hover);
+	box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+/* Size 樣式 */
+.btn-sm {
+	padding: var(--button-padding-sm);
+	font-size: var(--button-font-size-sm);
+}
+
+.btn-md {
+	padding: var(--button-padding-md);
+	font-size: var(--button-font-size-md);
+}
+
+.btn-lg {
+	padding: var(--button-padding-lg);
+	font-size: var(--button-font-size-lg);
+}

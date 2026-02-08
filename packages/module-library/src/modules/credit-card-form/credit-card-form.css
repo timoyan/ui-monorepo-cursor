@@ -1,0 +1,27 @@
+/* Credit Card Form - Scoped CSS */
+
+.credit-card-form {
+	display: block;
+	width: 100%;
+}
+
+.adyen-container {
+	width: 100%;
+	min-height: 200px;
+	padding: 16px 0;
+}
+
+.adyen-container.disabled {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+.error-message {
+	margin-top: 12px;
+	padding: 12px;
+	background-color: #fee;
+	border: 1px solid #fcc;
+	border-radius: 4px;
+	color: #c33;
+	font-size: 14px;
+}

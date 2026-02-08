@@ -1,0 +1,1 @@
+import{p as a,b as t}from"./p-jWJ8T0Ba.js";export{s as setNonce}from"./p-jWJ8T0Ba.js";import{g as r}from"./p-DQuL1Twl.js";var e=()=>{const t=import.meta.url;const s={};if(t!==""){s.resourcesUrl=new URL(".",t).href}return a(s)};e().then((async a=>{await r();return t([["p-54ea21eb",[[262,"my-button",{variant:[1],size:[1],disabled:[4],type:[1]}]]]],a)}));
