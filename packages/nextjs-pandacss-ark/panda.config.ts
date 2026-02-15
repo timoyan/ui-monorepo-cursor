@@ -6,6 +6,7 @@ export default defineConfig({
 	include: [
 		"./pages/**/*.{js,jsx,ts,tsx}",
 		"./components/**/*.{js,jsx,ts,tsx}",
+		"./features/**/*.{js,jsx,ts,tsx}",
 	],
 	exclude: [],
 	outdir: "styled-system",

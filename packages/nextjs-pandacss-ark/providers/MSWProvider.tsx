@@ -7,12 +7,15 @@ export function MSWProvider({ children }: { children: React.ReactNode }) {
 			process.env.NODE_ENV === "development" &&
 			typeof window !== "undefined"
 		) {
-			import("@/mocks/browser").then(({ worker }) => {
+			import("@/mocks/browser").then(({ worker }) =>
 				worker.start({
-					serviceWorker: { url: "/api/msw/worker" },
+					serviceWorker: {
+						url: "/api/msw/worker",
+						options: { scope: "/" },
+					},
 					...devOptions,
-				});
-			});
+				}),
+			);
 		}
 	}, []);
 
