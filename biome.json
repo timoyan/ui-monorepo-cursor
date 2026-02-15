@@ -19,7 +19,8 @@
 			"packages/ui-react19/build-types/**",
 			"packages/*/.next/**",
 			"packages/*/dist/**",
-			"packages/module-library/src/components.d.ts"
+			"packages/module-library/src/components.d.ts",
+			"**/mockServiceWorker.js"
 		]
 	}
 }

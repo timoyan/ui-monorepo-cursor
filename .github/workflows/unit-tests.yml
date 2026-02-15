@@ -18,6 +18,7 @@ jobs:
       matrix:
         package:
           - ui-react18
+          - nextjs-pandacss-ark
           # Add ui-react19 when tests are added there
           # - ui-react19
 

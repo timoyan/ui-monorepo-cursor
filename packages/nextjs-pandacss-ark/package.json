@@ -4,23 +4,38 @@
 	"private": true,
 	"scripts": {
 		"prepare": "panda codegen",
+		"msw:init": "rm -rf public/msw && msw init msw/",
 		"dev": "rm -rf .next && concurrently \"next dev\" \"panda codegen --watch\"",
 		"build": "next build",
-		"start": "next start"
+		"start": "next start",
+		"test": "vitest",
+		"test:run": "vitest run"
 	},
 	"dependencies": {
 		"@ark-ui/react": "^3.2.0",
+		"@reduxjs/toolkit": "^2.3.0",
 		"next": "^15.5.7",
 		"react": "^19.0.0",
-		"react-dom": "^19.0.0"
+		"react-dom": "^19.0.0",
+		"react-redux": "^9.2.0"
 	},
 	"devDependencies": {
 		"@pandacss/dev": "^0.52.0",
+		"msw": "^2.7.0",
 		"@types/node": "^24.10.1",
 		"@types/react": "^19.0.0",
 		"@types/react-dom": "^19.0.0",
 		"concurrently": "^9.2.1",
 		"postcss": "^8.4.49",
-		"typescript": "^5.9.3"
+		"typescript": "^5.9.3",
+		"@testing-library/jest-dom": "^6.1.5",
+		"@testing-library/react": "^14.1.2",
+		"@testing-library/user-event": "^14.5.1",
+		"@vitejs/plugin-react": "^4.2.1",
+		"jsdom": "^25.0.0",
+		"vitest": "^1.0.4"
+	},
+	"msw": {
+		"workerDirectory": ["msw"]
 	}
 }

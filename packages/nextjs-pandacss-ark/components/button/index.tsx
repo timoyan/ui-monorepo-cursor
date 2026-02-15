@@ -19,6 +19,11 @@ const StyledButton = styled(
 			_disabled: { opacity: 0.5, cursor: "not-allowed" },
 		},
 		variants: {
+			// Use isDisabled for styling so "disabled" is forwarded to the DOM
+			isDisabled: {
+				true: {},
+				false: {},
+			},
 			variant: {
 				primary: {
 					bg: "blue.500",
@@ -56,30 +61,26 @@ const StyledButton = styled(
 				true: { w: "full" },
 				false: { w: "auto" },
 			},
-			disabled: {
-				true: {},
-				false: {},
-			},
 		},
 		compoundVariants: [
 			{
 				variant: "primary",
-				disabled: true,
+				isDisabled: true,
 				css: { _hover: { bg: "blue.500" } },
 			},
 			{
 				variant: "secondary",
-				disabled: true,
+				isDisabled: true,
 				css: { _hover: { bg: "gray.200" } },
 			},
 			{
 				variant: "danger",
-				disabled: true,
+				isDisabled: true,
 				css: { _hover: { bg: "red.500" } },
 			},
 			{
 				variant: "ghost",
-				disabled: true,
+				isDisabled: true,
 				css: { _hover: { bg: "transparent" } },
 			},
 			{
@@ -92,7 +93,7 @@ const StyledButton = styled(
 			variant: "primary",
 			size: "md",
 			fullWidth: false,
-			disabled: false,
+			isDisabled: false,
 		},
 	},
 	{
@@ -100,4 +101,6 @@ const StyledButton = styled(
 	},
 );
 
-export const Button = StyledButton;
+export const Button = (props: React.ComponentProps<typeof StyledButton>) => (
+	<StyledButton {...props} isDisabled={props.disabled ?? false} />
+);
