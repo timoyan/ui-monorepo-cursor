@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
+import { act } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
@@ -30,8 +31,10 @@ describe("TodoSample", () => {
 	it("calls trigger and displays todo data from MSW handler on Fetch click", async () => {
 		renderWithStore(<TodoSample />);
 		const fetchButton = screen.getByRole("button", { name: /fetch/i });
-		await userEvent.click(fetchButton);
-		await screen.findByText(defaultTodo.title);
+		await act(async () => {
+			await userEvent.click(fetchButton);
+			await screen.findByText(defaultTodo.title);
+		});
 		expect(screen.getByText(defaultTodo.title)).toBeInTheDocument();
 		expect(screen.getByText(/id: 1 · user: 1/i)).toBeInTheDocument();
 		expect(screen.getByText(/not completed/i)).toBeInTheDocument();
@@ -46,7 +49,9 @@ describe("TodoSample", () => {
 		);
 		renderWithStore(<TodoSample />);
 		const fetchButton = screen.getByRole("button", { name: /fetch/i });
-		await userEvent.click(fetchButton);
+		await act(async () => {
+			await userEvent.click(fetchButton);
+		});
 		expect(
 			screen.getByRole("button", { name: /loading…/i }),
 		).toBeInTheDocument();
@@ -63,7 +68,9 @@ describe("TodoSample", () => {
 		);
 		renderWithStore(<TodoSample />);
 		const fetchButton = screen.getByRole("button", { name: /fetch/i });
-		await userEvent.click(fetchButton);
+		await act(async () => {
+			await userEvent.click(fetchButton);
+		});
 		expect(screen.getByRole("button", { name: /loading…/i })).toBeDisabled();
 		await screen.findByText(mockTodo.title);
 	});
@@ -76,8 +83,10 @@ describe("TodoSample", () => {
 		);
 		renderWithStore(<TodoSample />);
 		const fetchButton = screen.getByRole("button", { name: /fetch/i });
-		await userEvent.click(fetchButton);
-		await screen.findByText(/failed to load todo/i);
+		await act(async () => {
+			await userEvent.click(fetchButton);
+			await screen.findByText(/failed to load todo/i);
+		});
 		expect(screen.getByText(/failed to load todo/i)).toBeInTheDocument();
 	});
 
@@ -95,8 +104,10 @@ describe("TodoSample", () => {
 		);
 		renderWithStore(<TodoSample />);
 		const fetchButton = screen.getByRole("button", { name: /fetch/i });
-		await userEvent.click(fetchButton);
-		await screen.findByText(completedTodo.title);
+		await act(async () => {
+			await userEvent.click(fetchButton);
+			await screen.findByText(completedTodo.title);
+		});
 		expect(screen.getByText(/completed/i)).toBeInTheDocument();
 	});
 });
