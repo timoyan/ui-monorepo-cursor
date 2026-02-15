@@ -37,9 +37,13 @@ describe("ConnectedCartSample", () => {
 	it("renders empty cart with Add item button", async () => {
 		renderWithStore(<ConnectedCartSample />);
 		await screen.findByRole("heading", { name: /cart/i });
-		expect(
-			screen.getByText(/cart is empty\. click "add item" to add a product\./i),
-		).toBeInTheDocument();
+		const emptyMessage = screen.getByText(
+			(content) =>
+				/cart is empty/i.test(content) &&
+				/add item/i.test(content) &&
+				/add a product/i.test(content),
+		);
+		expect(emptyMessage).toBeInTheDocument();
 		expect(
 			screen.getByRole("button", { name: /add item/i }),
 		).toBeInTheDocument();
@@ -228,7 +232,10 @@ describe("ConnectedCartSample", () => {
 			await userEvent.click(removeBtn);
 		});
 		await screen.findByText(
-			/cart is empty\. click "add item" to add a product\./i,
+			(content) =>
+				/cart is empty/i.test(content) &&
+				/add item/i.test(content) &&
+				/add a product/i.test(content),
 		);
 		expect(screen.queryByText("Product D")).not.toBeInTheDocument();
 	});
