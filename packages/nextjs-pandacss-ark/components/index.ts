@@ -4,3 +4,4 @@ export {
 	AccordionItemTrigger,
 	AccordionItemContent,
 } from "./accordion";
+export { Button } from "./button";
