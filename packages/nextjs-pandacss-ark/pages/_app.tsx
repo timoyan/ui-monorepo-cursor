@@ -1,8 +1,8 @@
+import "@/global.css";
 import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import { store } from "@/core/store";
 import { useMSWReady } from "@/hooks/useMSWReady";
-import "@/global.css";
 
 function AppContent({ Component, pageProps }: AppProps) {
 	return (

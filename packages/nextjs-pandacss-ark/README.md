@@ -33,8 +33,8 @@ For detailed architecture documentation, see [ARCHITECTURE.md](./ARCHITECTURE.md
 
 ## Scripts
 
-- `pnpm dev` – Start development server
-- `pnpm build` – Build for production
+- `pnpm dev` – Start development server (do not use `--turbo`/`--turbopack`; PandaCSS works with the default Webpack dev server.)
+- `pnpm build` – Run `panda codegen` then build for production
 - `pnpm start` – Start production server
 - `pnpm test` – Run tests in watch mode
 - `pnpm test:run` – Run tests once (CI)

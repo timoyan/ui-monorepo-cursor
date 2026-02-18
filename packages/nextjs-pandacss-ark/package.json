@@ -6,7 +6,7 @@
 		"prepare": "panda codegen",
 		"msw:init": "rm -rf public/msw && msw init msw/",
 		"dev": "rm -rf .next && concurrently \"next dev\" \"panda codegen --watch\"",
-		"build": "next build",
+		"build": "panda codegen && next build",
 		"start": "next start",
 		"test": "vitest",
 		"test:run": "vitest run",
