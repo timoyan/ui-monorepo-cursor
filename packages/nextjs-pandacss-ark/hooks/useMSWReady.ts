@@ -19,17 +19,23 @@ export function useMSWReady(): boolean {
 		) {
 			return;
 		}
-		import("@/mocks/browser").then(({ worker }) =>
-			worker
-				.start({
+		import("@/mocks/browser")
+			.then(({ worker }) =>
+				worker.start({
 					serviceWorker: {
 						url: "/api/msw/worker",
 						options: { scope: "/" },
 					},
 					...devOptions,
-				})
-				.then(() => setReady(true)),
-		);
+				}),
+			)
+			.then(() => setReady(true))
+			.catch((error) => {
+				// Silently handle worker start failures
+				// The ready state remains false, which prevents rendering
+				// until the worker is successfully started
+				console.error("Failed to start MSW worker:", error);
+			});
 	}, []);
 
 	return ready;

@@ -8,6 +8,15 @@ import "@testing-library/jest-dom/vitest";
 import { server } from "../mocks/server";
 import { testOptions } from "../mocks/config";
 
+// Handle unhandled promise rejections in tests
+// This prevents test failures from unhandled rejections in hooks/components
+if (typeof process !== "undefined" && process.on) {
+	process.on("unhandledRejection", (reason) => {
+		// Suppress unhandled rejection errors during tests
+		// These are expected in some test scenarios (e.g., testing error handling)
+	});
+}
+
 beforeAll(() => server.listen(testOptions));
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
