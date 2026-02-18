@@ -1,0 +1,47 @@
+{
+	"name": "nextjs-pandacss-ark",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"prepare": "panda codegen",
+		"msw:init": "rm -rf public/msw && msw init msw/",
+		"dev": "rm -rf .next && concurrently \"next dev\" \"panda codegen --watch\"",
+		"build": "panda codegen && next build",
+		"start": "next start",
+		"test": "vitest",
+		"test:run": "vitest run",
+		"test:report": "vitest run --reporter=default --reporter=html --outputFile=./test-result/test-report.html",
+		"test:report:view": "npx --yes serve test-result -l 3131",
+		"test:coverage": "vitest run --coverage"
+	},
+	"dependencies": {
+		"@ark-ui/react": "^3.2.0",
+		"@reduxjs/toolkit": "^2.3.0",
+		"next": "^15.5.7",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"react-redux": "^9.2.0"
+	},
+	"devDependencies": {
+		"@pandacss/dev": "^0.52.0",
+		"@testing-library/jest-dom": "^6.1.5",
+		"@testing-library/react": "^14.1.2",
+		"@testing-library/user-event": "^14.5.1",
+		"@types/node": "^24.10.1",
+		"@types/react": "^19.0.0",
+		"@types/react-dom": "^19.0.0",
+		"@vitejs/plugin-react": "^4.2.1",
+		"@vitest/coverage-istanbul": "^1.6.1",
+		"@vitest/coverage-v8": "^1.6.1",
+		"@vitest/ui": "^1.6.1",
+		"concurrently": "^9.2.1",
+		"happy-dom": "^20.0.0",
+		"msw": "^2.7.0",
+		"postcss": "^8.4.49",
+		"typescript": "^5.9.3",
+		"vitest": "^1.0.4"
+	},
+	"msw": {
+		"workerDirectory": ["msw"]
+	}
+}

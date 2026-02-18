@@ -1,0 +1,1 @@
+export { ConnectedCartSample } from "./ConnectedCartSample";

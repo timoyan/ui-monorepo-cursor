@@ -55,6 +55,10 @@ jobs:
         working-directory: packages/nextjs15
         run: pnpm build
 
+      - name: Build nextjs-pandacss-ark
+        working-directory: packages/nextjs-pandacss-ark
+        run: pnpm build
+
       - name: Build vite-react18
         working-directory: packages/vite-react18
         run: pnpm build
@@ -68,6 +72,7 @@ jobs:
           echo "Verifying build outputs..."
           test -d packages/nextjs14/.next && echo "✓ nextjs14 build exists" || (echo "✗ nextjs14 build missing" && exit 1)
           test -d packages/nextjs15/.next && echo "✓ nextjs15 build exists" || (echo "✗ nextjs15 build missing" && exit 1)
+          test -d packages/nextjs-pandacss-ark/.next && echo "✓ nextjs-pandacss-ark build exists" || (echo "✗ nextjs-pandacss-ark build missing" && exit 1)
           test -d packages/ui-react18/build && echo "✓ ui-react18 build exists" || (echo "✗ ui-react18 build missing" && exit 1)
           test -d packages/ui-react19/build && echo "✓ ui-react19 build exists" || (echo "✗ ui-react19 build missing" && exit 1)
           test -d packages/vite-react18/dist && echo "✓ vite-react18 build exists" || (echo "✗ vite-react18 build missing" && exit 1)

@@ -6,6 +6,7 @@ This repository is a small UI monorepo that contains:
 - **`packages/ui-react19`** – React 19 component library (`Button`, `Card`) built with webpack 5, wyw‑in‑js, and extracted CSS.
 - **`packages/nextjs14`** – Next.js 14 app using the shared UI package (React 18).
 - **`packages/nextjs15`** – Next.js 15 app (App Router + React Compiler, React 19) using the shared UI package.
+- **`packages/nextjs-pandacss-ark`** – Next.js 15 app (Pages Router) with PandaCSS and Ark UI (`Button`, `Accordion`).
 - **`packages/vite-react18`** – Vite + React 18 example using the UI package.
 - **`packages/vite-react19`** – Vite + React 19 example using the UI package.
 
@@ -16,6 +17,8 @@ The UI package is shipped as ES modules, with React treated as an external depen
 - **React 18 / 19**
 - **Next.js 14 / 15**
 - **Vite 5**
+- **PandaCSS** – Build-time CSS-in-JS (used in `nextjs-pandacss-ark`)
+- **Ark UI** – Headless, accessible components (used in `nextjs-pandacss-ark`)
 - **`packages/ui-react18`**
   - wyw‑in‑js (`@wyw-in-js/webpack-loader`) + `@linaria/core` for static, zero‑runtime CSS
   - webpack 5 ES module output
@@ -48,6 +51,7 @@ This builds:
 - `packages/ui-react19` (library bundle + CSS)
 - `packages/nextjs14`
 - `packages/nextjs15`
+- `packages/nextjs-pandacss-ark`
 - `packages/vite-react18`
 - `packages/vite-react19`
 
@@ -65,6 +69,12 @@ pnpm --filter nextjs14 dev
 
 ```bash
 pnpm --filter nextjs15 dev
+```
+
+### Next.js + PandaCSS + Ark UI
+
+```bash
+pnpm --filter nextjs-pandacss-ark dev
 ```
 
 ### Vite + React 18
@@ -192,6 +202,7 @@ This repository includes GitHub Actions workflows for continuous integration:
 - **Packages built**:
   - `nextjs14`
   - `nextjs15`
+  - `nextjs-pandacss-ark`
   - `ui-react18`
   - `ui-react19`
   - `vite-react18`
