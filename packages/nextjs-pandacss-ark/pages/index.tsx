@@ -1,13 +1,13 @@
 import Head from "next/head";
 import { css } from "@/styled-system/css";
 import {
-	Accordion,
-	AccordionItem,
-	AccordionItemTrigger,
-	AccordionItemContent,
-	Button,
-} from "@/components";
-import { ConnectedCartSample } from "@/features/cart";
+	ModuleA,
+	ModuleBVariantSize,
+	ModuleBFullWidthDisabled,
+	ModuleC,
+} from "@/modules";
+import { ModuleContainer } from "@/components/layout/module-container";
+import { useModuleAccordion } from "@/core/hooks";
 
 const containerStyles = css({
 	display: "flex",
@@ -23,23 +23,9 @@ const headingStyles = css({
 	fontWeight: "bold",
 });
 
-const sectionStyles = css({
-	display: "flex",
-	flexDirection: "column",
-	alignItems: "center",
-	gap: "1rem",
-	w: "full",
-	maxW: "md",
-});
-
-const rowStyles = css({
-	display: "flex",
-	gap: "1rem",
-	flexWrap: "wrap",
-	justifyContent: "center",
-});
-
 export default function Home() {
+	const { getValue, getOnValueChange } = useModuleAccordion();
+
 	return (
 		<>
 			<Head>
@@ -51,69 +37,46 @@ export default function Home() {
 					Tech stack: Next.js · PandaCSS · Ark UI
 				</p>
 
-				<section className={sectionStyles}>
-					<h2 className={css({ fontSize: "lg", fontWeight: "semibold" })}>
-						Button – variant + size
-					</h2>
-					<div className={rowStyles}>
-						<Button variant="primary" size="sm">
-							Primary SM
-						</Button>
-						<Button variant="primary" size="md">
-							Primary MD
-						</Button>
-						<Button variant="primary" size="lg">
-							Primary LG
-						</Button>
-					</div>
-					<div className={rowStyles}>
-						<Button variant="secondary" size="sm">
-							Secondary
-						</Button>
-						<Button variant="danger" size="md">
-							Danger
-						</Button>
-						<Button variant="ghost" size="lg">
-							Ghost
-						</Button>
-					</div>
-				</section>
+				<ModuleContainer
+					moduleId="a"
+					title="Accordion example"
+					collapsible
+					value={getValue("a")}
+					onValueChange={getOnValueChange("a")}
+				>
+					<ModuleA />
+				</ModuleContainer>
 
-				<section className={sectionStyles}>
-					<h2 className={css({ fontSize: "lg", fontWeight: "semibold" })}>
-						Button – fullWidth + disabled
-					</h2>
-					<Button fullWidth variant="primary" size="lg">
-						Full Width Primary
-					</Button>
-					<div className={rowStyles}>
-						<Button variant="primary" disabled>
-							Disabled Primary
-						</Button>
-						<Button variant="danger" disabled>
-							Disabled Danger
-						</Button>
-					</div>
-				</section>
+				<ModuleContainer
+					moduleId="b-1"
+					title="Button – variant + size"
+					collapsible
+					value={getValue("b-1")}
+					onValueChange={getOnValueChange("b-1")}
+				>
+					<ModuleBVariantSize />
+				</ModuleContainer>
 
-				<ConnectedCartSample />
+				<ModuleContainer
+					moduleId="b-2"
+					title="Button – fullWidth + disabled"
+					collapsible
+					value={getValue("b-2")}
+					onValueChange={getOnValueChange("b-2")}
+				>
+					<ModuleBFullWidthDisabled />
+				</ModuleContainer>
 
-				<Accordion defaultValue={["item-1"]}>
-					<AccordionItem value="item-1">
-						<AccordionItemTrigger>What is PandaCSS?</AccordionItemTrigger>
-						<AccordionItemContent>
-							PandaCSS is a build-time CSS-in-JS framework with zero runtime
-							overhead. Styles are extracted at build time.
-						</AccordionItemContent>
-					</AccordionItem>
-					<AccordionItem value="item-2">
-						<AccordionItemTrigger>What is Ark UI?</AccordionItemTrigger>
-						<AccordionItemContent>
-							Ark UI is a headless, accessible component library. Style it with
-							PandaCSS using data-scope and data-part attributes.
-						</AccordionItemContent>
-					</AccordionItem>
-				</Accordion>
+				<ModuleContainer
+					moduleId="c"
+					title="Cart"
+					asWrapper
+					collapsible
+					value={getValue("c")}
+					onValueChange={getOnValueChange("c")}
+				>
+					<ModuleC />
+				</ModuleContainer>
 			</main>
 		</>
 	);

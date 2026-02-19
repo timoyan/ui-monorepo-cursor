@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { css } from "@/styled-system/css";
-import { Button } from "@/components";
+import { Button } from "@/components/ui/button";
 import {
 	useGetCartQuery,
 	useAddToCartMutation,

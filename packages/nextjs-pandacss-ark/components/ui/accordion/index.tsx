@@ -25,16 +25,14 @@ const StyledAccordionRoot = styled(AccordionRoot, {
 			px: 4,
 			textAlign: "left",
 			fontWeight: "medium",
+			color: "gray.900",
+			bg: "transparent",
 			_hover: { bg: "gray.50" },
 		},
 		"& [data-part=item-content]": {
 			px: 4,
 			pb: 4,
 			color: "gray.600",
-		},
-		"& [data-part=item][data-state=open] [data-part=item-content]": {
-			bg: "gray.600",
-			color: "white",
 		},
 	},
 });
