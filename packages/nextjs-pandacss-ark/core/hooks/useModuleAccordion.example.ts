@@ -3,6 +3,7 @@
  *
  * Shows how to control which module is open based on data
  */
+/** biome-ignore-all lint/correctness/noUnusedVariables: Example file - variables are intentionally unused for demonstration purposes */
 
 import { useModuleAccordion } from "./useModuleAccordion";
 
@@ -32,7 +33,7 @@ export function Example3({
 	currentStep,
 }: Example3Props) {
 	const { getValue, getOnValueChange } = useModuleAccordion({
-		shouldOpen: (data) => {
+		shouldOpen: (_data) => {
 			// Business logic: which module to open
 			if (hasError) {
 				return "error-module"; // Open error module when there is an error

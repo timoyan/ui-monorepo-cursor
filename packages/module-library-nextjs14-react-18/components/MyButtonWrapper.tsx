@@ -1,6 +1,6 @@
-import { MyButton as BaseMyButton } from "module-library/react";
 import type { JSX } from "module-library";
-import type { ReactNode, HTMLAttributes } from "react";
+import { MyButton as BaseMyButton } from "module-library/react";
+import type { HTMLAttributes, ReactNode } from "react";
 
 // 包裝組件，處理 SSR hydration 警告
 // 注意：suppressHydrationWarning 只能抑制該元素及其直接子元素的警告

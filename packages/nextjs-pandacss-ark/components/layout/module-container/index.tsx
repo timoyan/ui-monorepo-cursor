@@ -1,11 +1,11 @@
-import { css } from "@/styled-system/css";
 import type { ReactNode } from "react";
 import {
 	Accordion,
 	AccordionItem,
-	AccordionItemTrigger,
 	AccordionItemContent,
+	AccordionItemTrigger,
 } from "@/components/ui/accordion";
+import { css } from "@/styled-system/css";
 
 interface ModuleContainerProps {
 	children: ReactNode;

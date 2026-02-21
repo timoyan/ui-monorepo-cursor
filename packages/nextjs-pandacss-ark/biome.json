@@ -1,0 +1,65 @@
+{
+	"root": false,
+	"extends": "//",
+	"files": {
+		"includes": [
+			"**",
+			"!node_modules",
+			"!.next",
+			"!styled-system",
+			"!test-result",
+			"!test-results",
+			"!**/mockServiceWorker.js",
+			"!next-env.d.ts",
+			"!.turbo",
+			"!.cache",
+			"!coverage",
+			"!out",
+			"!**/*.tsbuildinfo",
+			"!playwright-report",
+			"!.playwright"
+		]
+	},
+	"overrides": [
+		{
+			"includes": ["features/**"],
+			"linter": {
+				"rules": {
+					"style": {
+						"noRestrictedImports": {
+							"level": "error",
+							"options": {
+								"patterns": [
+									{
+										"group": ["@/features/*"],
+										"message": "Features cannot import each other. Please compose features through upper layers (e.g., modules, pages)."
+									}
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		{
+			"includes": ["modules/**", "!modules/**/__tests__/**"],
+			"linter": {
+				"rules": {
+					"style": {
+						"noRestrictedImports": {
+							"level": "error",
+							"options": {
+								"patterns": [
+									{
+										"group": ["@/modules/*"],
+										"message": "Modules cannot import each other. Please compose through upper layers (e.g., pages)."
+									}
+								]
+							}
+						}
+					}
+				}
+			}
+		}
+	]
+}

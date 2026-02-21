@@ -1,7 +1,7 @@
 import { styled } from "@linaria/react";
 import type React from "react";
-import type { ReactNode, HTMLAttributes } from "react";
-import { useEffect, useState, useRef } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const variantColors = {
 	success: {
@@ -166,6 +166,16 @@ export const Toast: React.FC<ToastProps> = ({
 	const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 	const pauseRef = useRef(false);
 
+	const handleClose = useCallback(() => {
+		if (isExiting) return;
+
+		setIsExiting(true);
+		// Wait for exit animation before calling onClose
+		setTimeout(() => {
+			onClose();
+		}, 300);
+	}, [onClose, isExiting]);
+
 	// Show animation on mount
 	useEffect(() => {
 		// Small delay to trigger animation
@@ -189,17 +199,7 @@ export const Toast: React.FC<ToastProps> = ({
 				clearTimeout(timeoutRef.current);
 			}
 		};
-	}, [duration, preventAutoDismiss]);
-
-	const handleClose = () => {
-		if (isExiting) return;
-
-		setIsExiting(true);
-		// Wait for exit animation before calling onClose
-		setTimeout(() => {
-			onClose();
-		}, 300);
-	};
+	}, [duration, preventAutoDismiss, handleClose]);
 
 	const handlePause = () => {
 		pauseRef.current = true;

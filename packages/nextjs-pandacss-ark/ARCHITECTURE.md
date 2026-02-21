@@ -243,6 +243,10 @@ Does state need to be used across modules/features or core?
 
 **Principle**: Test files are placed in the same directory as the feature
 
+**Unit test rules** (enforced by `pnpm run lint:test`):
+
+- **No snapshot tests**: Do not use `toMatchSnapshot` or `toMatchInlineSnapshot`. Use explicit assertions (e.g. `expect(...).toBe()`, `expect(...).toContain()`, DOM/state queries) so tests are stable and intent is clear.
+
 **Structure**:
 ```
 features/

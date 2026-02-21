@@ -1,8 +1,8 @@
 import type React from "react";
 import type { ReactNode } from "react";
 import { createContext, useContext } from "react";
-import { useToast, type ToastContextValue } from "./useToast";
 import { ToastContainer } from "./ToastContainer";
+import { type ToastContextValue, useToast } from "./useToast";
 
 const ToastContext = createContext<ToastContextValue | null>(null);
 

@@ -7,7 +7,7 @@ function ensureDir(p) {
 	}
 }
 
-function readIfExists(p) {
+function _readIfExists(p) {
 	try {
 		return fs.readFileSync(p, "utf8");
 	} catch {

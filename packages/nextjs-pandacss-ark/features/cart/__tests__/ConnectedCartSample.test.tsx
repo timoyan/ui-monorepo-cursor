@@ -1,15 +1,15 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import { act } from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { HttpResponse, http } from "msw";
+import { act } from "react";
 import { Provider } from "react-redux";
-import { store } from "@/core/store";
+import { beforeEach, describe, expect, it } from "vitest";
 import { apiSlice } from "@/apis/apiSlice";
-import { ConnectedCartSample } from "../ConnectedCartSample";
-import { server } from "@/mocks/server";
-import { http, HttpResponse } from "msw";
 import type { CartItem } from "@/apis/cart";
+import { store } from "@/core/store";
 import { createMockCartItem } from "@/mocks/fixtures";
+import { server } from "@/mocks/server";
+import { ConnectedCartSample } from "../ConnectedCartSample";
 
 function renderWithStore(ui: React.ReactElement) {
 	return render(<Provider store={store}>{ui}</Provider>);
@@ -20,6 +20,16 @@ beforeEach(() => {
 });
 
 describe("ConnectedCartSample", () => {
+	// 僅用於驗證 lint:test 會擋 snapshot，驗證完請刪除此 test
+	it("snapshot placeholder (remove after verifying lint:test)", async () => {
+		server.use(
+			http.get("http://test.com/api/cart", () => HttpResponse.json([])),
+		);
+		const { container } = renderWithStore(<ConnectedCartSample />);
+		await screen.findByText(/Cart is empty/i);
+		expect(container.firstChild).toMatchSnapshot();
+	});
+
 	it("renders loading state while fetching cart", async () => {
 		server.use(
 			http.get("http://test.com/api/cart", async () => {

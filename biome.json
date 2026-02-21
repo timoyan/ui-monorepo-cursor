@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.4.3/schema.json",
 	"formatter": {
 		"enabled": true
 	},
@@ -10,17 +10,33 @@
 		}
 	},
 	"files": {
-		"ignore": [
-			"node_modules/**",
-			"packages/*/node_modules/**",
-			"packages/ui-react18/build/**",
-			"packages/ui-react18/build-types/**",
-			"packages/ui-react19/build/**",
-			"packages/ui-react19/build-types/**",
-			"packages/*/.next/**",
-			"packages/*/dist/**",
-			"packages/module-library/src/components.d.ts",
-			"**/mockServiceWorker.js"
+		"includes": [
+			"**",
+			"!node_modules",
+			"!packages/*/node_modules",
+			"!packages/*/build",
+			"!packages/*/build-types",
+			"!packages/*/.next",
+			"!packages/*/dist",
+			"!packages/module-library/loader",
+			"!packages/module-library/react",
+			"!packages/module-library/src/components.d.ts",
+			"!packages/module-library/test",
+			"!**/mockServiceWorker.js",
+			"!**/styled-system",
+			"!**/test-result",
+			"!**/test-results",
+			"!**/next-env.d.ts",
+			"!**/.stencil",
+			"!**/.storybook",
+			"!**/coverage",
+			"!**/out",
+			"!**/*.tsbuildinfo",
+			"!.turbo",
+			"!.cache",
+			"!playwright-report",
+			"!test-results",
+			"!.playwright"
 		]
 	}
 }

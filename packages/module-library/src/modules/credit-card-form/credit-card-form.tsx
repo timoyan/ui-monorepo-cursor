@@ -1,12 +1,12 @@
-import { Component, Prop, Event, State, h, Element } from "@stencil/core";
-import type { EventEmitter } from "@stencil/core";
 // 引入型別定義
 import type {
-	CoreConfiguration,
 	CardConfiguration,
 	CardPlaceholders,
 	CheckoutAdvancedFlowResponse,
+	CoreConfiguration,
 } from "@adyen/adyen-web";
+import type { EventEmitter } from "@stencil/core";
+import { Component, Element, Event, Prop, State } from "@stencil/core";
 
 // StylesObject 沒有被導出，我們需要自己定義或使用 any
 // 根據 Adyen 文檔，StylesObject 的結構如下：

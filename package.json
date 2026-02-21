@@ -3,7 +3,13 @@
 	"private": true,
 	"scripts": {
 		"lint": "biome lint .",
+		"lint:fix": "biome lint --write --unsafe .",
 		"format": "biome format .",
+		"format:check": "biome format .",
+		"format:write": "biome format --write .",
+		"check": "biome check .",
+		"check:fix": "biome check --write --unsafe .",
+		"validate": "biome check .",
 		"prepare": "husky",
 		"lint-staged": "lint-staged",
 		"test:e2e": "playwright test",
@@ -14,7 +20,7 @@
 		"clean-install": "rm -rf node_modules packages/*/node_modules pnpm-lock.yaml && pnpm install"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.9.4",
+		"@biomejs/biome": "^2.4.3",
 		"@playwright/test": "^1.56.1",
 		"@types/node": "^24.10.1",
 		"husky": "^9.1.7",
@@ -34,6 +40,8 @@
 			"esbuild": ">=0.25.0",
 			"test-exclude": "^7.0.0"
 		},
-		"ignoredBuiltDependencies": ["msw"]
+		"ignoredBuiltDependencies": [
+			"msw"
+		]
 	}
 }

@@ -12,8 +12,8 @@ export interface ZagAdapterOptions<T = unknown> {
  * 用於在 Stencil 組件中整合 Zag.js 狀態機
  */
 export function createZagAdapter<TState, TEvent = unknown>(
-	machine: unknown,
-	options?: ZagAdapterOptions<TState>,
+	_machine: unknown,
+	_options?: ZagAdapterOptions<TState>,
 ): {
 	state: TState;
 	send: (event: TEvent) => void;

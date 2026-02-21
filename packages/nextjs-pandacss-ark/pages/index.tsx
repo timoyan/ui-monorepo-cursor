@@ -1,13 +1,13 @@
 import Head from "next/head";
-import { css } from "@/styled-system/css";
-import {
-	ModuleA,
-	ModuleBVariantSize,
-	ModuleBFullWidthDisabled,
-	ModuleC,
-} from "@/modules";
 import { ModuleContainer } from "@/components/layout/module-container";
 import { useModuleAccordion } from "@/core/hooks";
+import {
+	ModuleA,
+	ModuleBFullWidthDisabled,
+	ModuleBVariantSize,
+	ModuleC,
+} from "@/modules";
+import { css } from "@/styled-system/css";
 
 const containerStyles = css({
 	display: "flex",

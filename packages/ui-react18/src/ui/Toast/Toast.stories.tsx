@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ToastProvider, useToastContext } from "./ToastProvider";
 import { Button } from "../Button";
+import { ToastProvider, useToastContext } from "./ToastProvider";
 
 const meta: Meta<typeof ToastProvider> = {
 	title: "UI/Toast",

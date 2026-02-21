@@ -1,6 +1,6 @@
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useState } from "react";
-import dynamic from "next/dynamic";
 // 使用包裝組件處理 SSR hydration 警告
 import { MyButton } from "../components/MyButtonWrapper";
 // 載入組件 CSS
@@ -16,13 +16,14 @@ const CreditCardForm = dynamic(
 		loading: () => <div style={{ color: "#666", padding: 20 }}>載入中...</div>,
 	},
 );
-import type { CreditCardFormData, AdyenConfig } from "module-library";
+
+import type { AdyenConfig, CreditCardFormData } from "module-library";
 
 export default function Home() {
 	const [clickCount, setClickCount] = useState(0);
 	const [formData, setFormData] = useState<CreditCardFormData | null>(null);
 	const [formError, setFormError] = useState<string | null>(null);
-	const [isFormReady, setIsFormReady] = useState(false);
+	const [_isFormReady, setIsFormReady] = useState(false);
 
 	const handleButtonClick = () => {
 		setClickCount((prev) => prev + 1);

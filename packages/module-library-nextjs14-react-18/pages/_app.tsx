@@ -1,6 +1,6 @@
+import { defineCustomElements } from "module-library/loader";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
-import { defineCustomElements } from "module-library/loader";
 
 export default function App({ Component, pageProps }: AppProps) {
 	useEffect(() => {

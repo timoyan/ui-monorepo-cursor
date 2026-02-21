@@ -1,0 +1,12 @@
+---
+description: Unit test conventions for nextjs-pandacss-ark (no snapshots)
+globs: packages/nextjs-pandacss-ark/**/*.test.ts,packages/nextjs-pandacss-ark/**/*.test.tsx
+alwaysApply: false
+---
+
+# nextjs-pandacss-ark Unit Test Rules
+
+## No snapshot tests
+
+- **Do not use snapshot tests** (e.g. `toMatchSnapshot`, `toMatchInlineSnapshot`) in this package.
+- Prefer explicit assertions (e.g. `expect(...).toBe()`, `expect(...).toContain()`, querying DOM/state) so tests are stable and intent is clear.

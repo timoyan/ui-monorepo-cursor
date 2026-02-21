@@ -1,7 +1,7 @@
-import { useState, useCallback, useRef } from "react";
 import type { ReactNode } from "react";
-import { Toast } from "./Toast";
+import { useCallback, useRef, useState } from "react";
 import type { ToastVariant } from "./Toast";
+import { Toast } from "./Toast";
 
 export interface ToastItem {
 	id: string;

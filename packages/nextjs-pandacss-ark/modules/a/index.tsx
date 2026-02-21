@@ -1,8 +1,8 @@
 import {
 	Accordion,
 	AccordionItem,
-	AccordionItemTrigger,
 	AccordionItemContent,
+	AccordionItemTrigger,
 } from "@/components/ui/accordion";
 
 /**

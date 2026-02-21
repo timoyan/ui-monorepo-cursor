@@ -1,5 +1,5 @@
-import { Component, Prop, Event, h } from "@stencil/core";
 import type { EventEmitter } from "@stencil/core";
+import { Component, Event, Prop } from "@stencil/core";
 
 export type ButtonVariant = "primary" | "secondary" | "success" | "danger";
 export type ButtonSize = "sm" | "md" | "lg";

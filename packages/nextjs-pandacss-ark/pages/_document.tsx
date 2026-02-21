@@ -1,6 +1,6 @@
-import { Html, Head, Main, NextScript } from "next/document";
-import { readFileSync, existsSync, readdirSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { Head, Html, Main, NextScript } from "next/document";
 
 /**
  * Custom Head component that prevents CSS link tags when CSS is inlined
@@ -52,7 +52,7 @@ export default function Document() {
 					cssContent = readFileSync(join(cssPath, cssFiles[0]), "utf8");
 				}
 			}
-		} catch (error) {
+		} catch (_error) {
 			// Fallback: CSS will load via external link if read fails
 			// This is fine - Next.js will still include the CSS link tag
 		}

@@ -1,10 +1,10 @@
-import { styled } from "@/styled-system/jsx";
 import {
-	AccordionRoot,
 	AccordionItem,
-	AccordionItemTrigger,
 	AccordionItemContent,
+	AccordionItemTrigger,
+	AccordionRoot,
 } from "@ark-ui/react/accordion";
+import { styled } from "@/styled-system/jsx";
 
 const StyledAccordionRoot = styled(AccordionRoot, {
 	base: {

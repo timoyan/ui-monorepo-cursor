@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useState } from "react";
 import type { ReactNode } from "react";
-import { Modal } from "./Modal";
+import { useState } from "react";
 import { Button } from "../Button";
+import { Modal } from "./Modal";
 
 const meta: Meta<typeof Modal> = {
 	title: "UI/Modal",

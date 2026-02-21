@@ -1,1 +1,1 @@
-export { defaultCartItem, createMockCartItem } from "./cart";
+export { createMockCartItem, defaultCartItem } from "./cart";

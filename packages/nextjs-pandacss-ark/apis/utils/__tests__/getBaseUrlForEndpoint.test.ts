@@ -1,7 +1,7 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
-	getBaseUrlForEndpoint,
 	CART_ENDPOINTS,
+	getBaseUrlForEndpoint,
 } from "@/apis/utils/getBaseUrlForEndpoint";
 
 const CART_BASE_URL = "http://test.com/api";

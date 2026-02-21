@@ -1,6 +1,6 @@
 import { styled } from "@linaria/react";
 import type React from "react";
-import type { ReactNode, HTMLAttributes } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
 import { useEffect, useRef } from "react";
 
 const StyledDialog = styled.dialog`

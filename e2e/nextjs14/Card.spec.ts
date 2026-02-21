@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 test.describe("Next.js 14 - Card Component", () => {
 	test.beforeEach(async ({ page }) => {

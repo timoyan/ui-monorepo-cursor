@@ -1,0 +1,24 @@
+---
+description: Token saving and efficiency rules for Cursor (strict file access, modular edits, concise replies)
+alwaysApply: true
+---
+
+# Cursor Token Saving & Efficiency Rules
+
+## 1. Context Control
+- **Strict File Access**: Do not read `node_modules/`, `dist/`, `build/`, `.git/`, or large `.log`/`.json` data files unless explicitly requested (e.g. via @).
+- **Modular Thinking**: When editing code, focus only on the relevant component or function. Do not read the entire project's backend API for a simple UI change.
+- **No Heavy Scanning**: Do not run project-wide searches for simple variable definitions; ask the user or have them provide the location.
+
+## 2. Model Usage Strategy
+- **Auto Mode Priority**: For routine completions, formatting, and simple bug fixes, prefer guiding the user to use `auto` mode or a small model.
+- **Composer 1.5 Discipline**: Suggest Composer 1.5 only for large cross-file refactors or highly complex algorithm work.
+- **Thinking Token Reduction**: Keep replies concise. Prefer code changes (diffs) over long explanations unless the user asks for rationale.
+
+## 3. Interaction Protocol
+- **New Session Reminder**: If chat history grows long (e.g. over 10 turns), remind the user: "Context is large; consider starting a new chat to save tokens."
+- **Context Pruning**: Before each request, check for duplicate or irrelevant context and avoid re-reading the same large file in the same conversation.
+
+## 4. Performance Optimization
+- **Prevent Max Mode**: Do not use Max Mode by default. Stay within Standard Context unless the user explicitly says "Use Max Mode".
+- **Incremental Updates**: When editing, only change the affected parts; do not rewrite entire files.

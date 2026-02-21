@@ -1,13 +1,11 @@
 import "@testing-library/jest-dom";
-import { expect, afterEach, beforeAll } from "vitest";
 import { cleanup } from "@testing-library/react";
+import { afterEach, beforeAll } from "vitest";
 
 // Polyfill for HTMLDialogElement methods (jsdom doesn't support them)
 beforeAll(() => {
 	// Define open property getter/setter if not already defined
-	if (
-		!Object.prototype.hasOwnProperty.call(HTMLDialogElement.prototype, "open")
-	) {
+	if (!Object.hasOwn(HTMLDialogElement.prototype, "open")) {
 		Object.defineProperty(HTMLDialogElement.prototype, "open", {
 			get() {
 				return this.hasAttribute("open");

@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "ui-react18/Button";
 import "ui-react18/Button/style.css";
 import { Card } from "ui-react18/Card";

@@ -1,0 +1,32 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ConnectedCartSample > snapshot placeholder (remove after verifying lint:test) 1`] = `
+<section
+  class="d_flex flex-d_column ai_center gap_1rem w_full max-w_md"
+>
+  <div
+    class="d_flex ai_center jc_space-between w_full gap_2"
+  >
+    <h2
+      class="fs_lg fw_semibold"
+    >
+      Cart
+    </h2>
+    <button
+      class="d_inline-flex ai_center jc_center fw_medium bdr_md cursor_pointer trs_colors_0.2s focusVisible:ring_2px_solid focusVisible:ring-c_blue.500 focusVisible:ring-o_2px disabled:op_0.5 disabled:cursor_not-allowed bg_blue.500 c_white hover:bg_blue.600 active:bg_blue.700 px_3 py_1.5 fs_sm w_auto"
+      type="button"
+    >
+      Add item
+    </button>
+  </div>
+  <div
+    class="w_full d_flex flex-d_column gap_2"
+  >
+    <div
+      class="w_full p_4 bdr_md bd-w_1px bd-c_gray.200 bg_gray.50 c_gray.500 font-style_italic"
+    >
+      Cart is empty.
+    </div>
+  </div>
+</section>
+`;

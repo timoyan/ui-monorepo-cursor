@@ -1,11 +1,11 @@
-import { describe, it, expect, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { HttpResponse, http } from "msw";
 import { Provider } from "react-redux";
-import { store } from "@/core/store";
+import { beforeEach, describe, expect, it } from "vitest";
 import { apiSlice } from "@/apis/apiSlice";
-import { ModuleC } from "@/modules/c";
+import { store } from "@/core/store";
 import { server } from "@/mocks/server";
-import { http, HttpResponse } from "msw";
+import { ModuleC } from "@/modules/c";
 
 function renderWithStore(ui: React.ReactElement) {
 	return render(<Provider store={store}>{ui}</Provider>);

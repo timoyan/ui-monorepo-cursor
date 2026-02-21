@@ -1,6 +1,6 @@
+import { join } from "node:path";
 import type { Config } from "@stencil/core";
 import { reactOutputTarget } from "@stencil/react-output-target";
-import { join } from "node:path";
 
 export const config: Config = {
 	namespace: "module-library",

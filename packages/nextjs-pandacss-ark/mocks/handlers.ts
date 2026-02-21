@@ -1,9 +1,9 @@
-import { http, HttpResponse } from "msw";
+import { HttpResponse, http } from "msw";
 import {
-	getCart,
 	addToCart,
-	updateQuantity,
+	getCart,
 	removeFromCart,
+	updateQuantity,
 } from "./local-dev-store/cartStore";
 
 /**

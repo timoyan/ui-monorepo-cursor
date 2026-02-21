@@ -67,5 +67,9 @@
 			"default": "./dist/collection/components/my-button/my-button.css"
 		}
 	},
-	"files": ["dist/", "react/", "loader/"]
+	"files": [
+		"dist/",
+		"react/",
+		"loader/"
+	]
 }

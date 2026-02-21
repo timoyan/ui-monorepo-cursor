@@ -12,7 +12,8 @@
 		"test:run": "vitest run",
 		"test:report": "vitest run --reporter=default --reporter=html --outputFile=./test-result/test-report.html",
 		"test:report:view": "npx --yes serve test-result -l 3131",
-		"test:coverage": "vitest run --coverage"
+		"test:coverage": "vitest run --coverage",
+		"lint:test": "! grep -rE 'toMatch(Inline)?Snapshot' --include='*.test.ts' --include='*.test.tsx' --exclude-dir=node_modules . 2>/dev/null"
 	},
 	"dependencies": {
 		"@ark-ui/react": "^3.2.0",
@@ -42,6 +43,8 @@
 		"vitest": "^1.0.4"
 	},
 	"msw": {
-		"workerDirectory": ["msw"]
+		"workerDirectory": [
+			"msw"
+		]
 	}
 }

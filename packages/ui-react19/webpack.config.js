@@ -1,5 +1,5 @@
 const path = require("node:path");
-const webpack = require("webpack");
+const _webpack = require("webpack");
 const fs = require("node:fs");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -34,7 +34,7 @@ class AggregateCssPlugin {
 	}
 }
 
-module.exports = (env, argv) => {
+module.exports = (_env, argv) => {
 	const isProduction = argv.mode === "production";
 
 	return {

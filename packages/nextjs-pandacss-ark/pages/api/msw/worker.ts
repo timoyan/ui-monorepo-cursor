@@ -1,6 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import { existsSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 /** Resolve path to mockServiceWorker.js: try __dirname-relative first, then process.cwd() (for Vercel/Docker). */
 function getWorkerPath(): string | null {
