@@ -25,7 +25,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'pnpm'
 
       - name: Setup pnpm cache
@@ -58,6 +58,10 @@ jobs:
       - name: Build nextjs-pandacss-ark
         working-directory: packages/nextjs-pandacss-ark
         run: pnpm build
+
+      - name: Docker build nextjs-pandacss-ark
+        working-directory: packages/nextjs-pandacss-ark
+        run: docker build -f Dockerfile -t nextjs-pandacss-ark .
 
       - name: Build vite-react18
         working-directory: packages/vite-react18
