@@ -2,6 +2,9 @@
 	"name": "nextjs-pandacss-ark",
 	"version": "0.1.0",
 	"private": true,
+	"engines": {
+		"node": ">=22.0.0 <23.0.0"
+	},
 	"scripts": {
 		"prepare": "panda codegen",
 		"msw:init": "rm -rf public/msw && msw init msw/",
@@ -29,7 +32,7 @@
 		"@testing-library/jest-dom": "^6.1.5",
 		"@testing-library/react": "^14.1.2",
 		"@testing-library/user-event": "^14.5.1",
-		"@types/node": "^24.10.1",
+		"@types/node": "^22.0.0",
 		"@types/react": "^19.0.0",
 		"@types/react-dom": "^19.0.0",
 		"@vitejs/plugin-react": "^4.2.1",

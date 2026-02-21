@@ -20,11 +20,11 @@
 		"clean-install": "rm -rf node_modules packages/*/node_modules pnpm-lock.yaml && pnpm install"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.3",
-		"@playwright/test": "^1.56.1",
-		"@types/node": "^24.10.1",
+		"@biomejs/biome": "^2.4.4",
+		"@playwright/test": "^1.58.2",
+		"@types/node": "^22.0.0",
 		"husky": "^9.1.7",
-		"lint-staged": "^15.2.10"
+		"lint-staged": "^16.2.7"
 	},
 	"lint-staged": {
 		"*.*": [
