@@ -25,49 +25,109 @@ const MIME_TYPES = {
 	".map": "application/json",
 };
 
+// 確保給定絕對路徑在 rootDir 之下（含 rootDir 本身）
+function isWithinRoot(resolvedPath, rootDir) {
+	const normalizedRoot = path.resolve(rootDir);
+	const normalizedPath = path.resolve(resolvedPath);
+	return (
+		normalizedPath === normalizedRoot ||
+		normalizedPath.startsWith(normalizedRoot + path.sep)
+	);
+}
+
 const server = http.createServer((req, res) => {
 	// 解析 URL，移除查詢字符串
 	const urlPath = req.url.split("?")[0];
 
 	// 處理 dist 目錄的請求（CSS、JS 等資源文件）
 	if (urlPath.startsWith("/dist/")) {
-		const distPath = path.join(DIST_DIR, urlPath.replace(/^\/dist\//, ""));
-		if (fs.existsSync(distPath)) {
-			const ext = path.extname(distPath);
-			const contentType = MIME_TYPES[ext] || "application/octet-stream";
-			const content = fs.readFileSync(distPath);
-			res.writeHead(200, { "Content-Type": contentType });
-			res.end(content, "utf-8");
+		const relativeDistPath = urlPath.replace(/^\/dist\//, "");
+		const resolvedDistPath = path.resolve(DIST_DIR, relativeDistPath);
+		if (!isWithinRoot(resolvedDistPath, DIST_DIR)) {
+			res.writeHead(403);
+			res.end("Forbidden");
 			return;
 		}
+		let safeDistPath = resolvedDistPath;
+		if (fs.existsSync(safeDistPath)) {
+			try {
+				const canonical = fs.realpathSync(safeDistPath);
+				const realDistDir = fs.realpathSync(DIST_DIR);
+				if (
+					!(
+						canonical === realDistDir ||
+						canonical.startsWith(realDistDir + path.sep)
+					)
+				) {
+					res.writeHead(403);
+					res.end("Forbidden");
+					return;
+				}
+				safeDistPath = canonical;
+			} catch {
+				// 無法解析 realpath 時沿用 resolved 路徑
+			}
+		}
+		if (!fs.existsSync(safeDistPath)) {
+			res.writeHead(404);
+			res.end("File not found");
+			return;
+		}
+		const ext = path.extname(safeDistPath);
+		const contentType = MIME_TYPES[ext] || "application/octet-stream";
+		const content = fs.readFileSync(safeDistPath);
+		res.writeHead(200, { "Content-Type": contentType });
+		res.end(content, "utf-8");
+		return;
 	}
 
-	// 處理測試目錄的文件
-	let filePath = path.join(TEST_DIR, urlPath === "/" ? "index.html" : urlPath);
-
-	// 安全檢查：確保文件在測試目錄或 dist 目錄內
-	const allowedDirs = [TEST_DIR, DIST_DIR];
-	const isAllowed = allowedDirs.some((dir) => filePath.startsWith(dir));
-
-	if (!isAllowed && !urlPath.startsWith("/dist/")) {
+	// 處理測試目錄的文件：先換成相對路徑再 resolve，避免把 url 當絕對路徑
+	const requestedPath =
+		urlPath === "/" ? "index.html" : urlPath.replace(/^\/+/, "");
+	let safePath = path.resolve(TEST_DIR, requestedPath);
+	if (!isWithinRoot(safePath, TEST_DIR)) {
 		res.writeHead(403);
 		res.end("Forbidden");
 		return;
 	}
+	if (fs.existsSync(safePath)) {
+		try {
+			const canonical = fs.realpathSync(safePath);
+			const realTestDir = fs.realpathSync(TEST_DIR);
+			if (
+				!(
+					canonical === realTestDir ||
+					canonical.startsWith(realTestDir + path.sep)
+				)
+			) {
+				res.writeHead(403);
+				res.end("Forbidden");
+				return;
+			}
+			safePath = canonical;
+		} catch {
+			// 無法解析 realpath 時沿用 resolved 路徑
+		}
+	}
 
 	// 如果請求的是目錄，嘗試載入 index.html
-	if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
-		filePath = path.join(filePath, "index.html");
+	if (fs.existsSync(safePath) && fs.statSync(safePath).isDirectory()) {
+		safePath = path.resolve(safePath, "index.html");
+		if (!isWithinRoot(safePath, TEST_DIR)) {
+			res.writeHead(403);
+			res.end("Forbidden");
+			return;
+		}
 	}
 
 	// 如果文件不存在，返回 404
-	if (!fs.existsSync(filePath)) {
+	if (!fs.existsSync(safePath)) {
 		res.writeHead(404);
-		res.end(`File not found: ${urlPath}`);
+		res.end("File not found");
 		return;
 	}
 
-	fs.readFile(filePath, (err, content) => {
+	fs.readFile(safePath, (err, content) => {
 		if (err) {
 			if (err.code === "ENOENT") {
 				res.writeHead(404);
@@ -77,7 +137,7 @@ const server = http.createServer((req, res) => {
 				res.end(`Server error: ${err.code}`);
 			}
 		} else {
-			const ext = path.extname(filePath);
+			const ext = path.extname(safePath);
 			const contentType = MIME_TYPES[ext] || "application/octet-stream";
 			res.writeHead(200, { "Content-Type": contentType });
 			res.end(content, "utf-8");

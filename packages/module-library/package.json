@@ -11,6 +11,7 @@
 		"test": "stencil test",
 		"test:watch": "stencil test --watch",
 		"test:serve": "node test-server.js",
+		"test:serve:verify": "node scripts/verify-test-server.js",
 		"generate": "stencil generate",
 		"version:patch": "pnpm version patch && pnpm build",
 		"version:minor": "pnpm version minor && pnpm build",
