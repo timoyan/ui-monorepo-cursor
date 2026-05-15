@@ -1,0 +1,32 @@
+{
+	"name": "pareto-pandacss-ark",
+	"version": "0.1.0",
+	"private": true,
+	"engines": {
+		"node": ">=22.0.0 <23.0.0"
+	},
+	"scripts": {
+		"prepare": "panda codegen",
+		"dev": "concurrently \"pareto dev\" \"panda codegen --watch\"",
+		"build": "panda codegen && NODE_ENV=production pareto build",
+		"start": "NODE_ENV=production pareto start"
+	},
+	"dependencies": {
+		"@ark-ui/react": "^3.2.0",
+		"@paretojs/core": "^5.0.0",
+		"express": "^5.2.1",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0"
+	},
+	"devDependencies": {
+		"@pandacss/dev": "^0.52.0",
+		"@types/express": "^5.0.6",
+		"@types/node": "^22.0.0",
+		"@types/react": "^19.0.0",
+		"@types/react-dom": "^19.0.0",
+		"concurrently": "^9.2.1",
+		"postcss": "^8.4.49",
+		"typescript": "^5.9.3",
+		"vite": "^7.3.1"
+	}
+}

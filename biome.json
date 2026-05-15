@@ -17,6 +17,7 @@
 			"!packages/*/build",
 			"!packages/*/build-types",
 			"!packages/*/.next",
+			"!packages/*/.pareto",
 			"!packages/*/dist",
 			"!packages/module-library/loader",
 			"!packages/module-library/react",

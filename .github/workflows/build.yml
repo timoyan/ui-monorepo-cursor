@@ -20,7 +20,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: latest
+          version: 10.22.0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -59,6 +59,10 @@ jobs:
         working-directory: packages/nextjs-pandacss-ark
         run: pnpm build
 
+      - name: Build pareto-pandacss-ark
+        working-directory: packages/pareto-pandacss-ark
+        run: pnpm build
+
       - name: Docker build nextjs-pandacss-ark
         working-directory: packages/nextjs-pandacss-ark
         run: docker build -f Dockerfile -t nextjs-pandacss-ark .
@@ -81,6 +85,7 @@ jobs:
           test -d packages/nextjs14/.next && echo "✓ nextjs14 build exists" || (echo "✗ nextjs14 build missing" && exit 1)
           test -d packages/nextjs15/.next && echo "✓ nextjs15 build exists" || (echo "✗ nextjs15 build missing" && exit 1)
           test -d packages/nextjs-pandacss-ark/.next && echo "✓ nextjs-pandacss-ark build exists" || (echo "✗ nextjs-pandacss-ark build missing" && exit 1)
+          test -d packages/pareto-pandacss-ark/.pareto && echo "✓ pareto-pandacss-ark build exists" || (echo "✗ pareto-pandacss-ark build missing" && exit 1)
           test -d packages/ui-react18/build && echo "✓ ui-react18 build exists" || (echo "✗ ui-react18 build missing" && exit 1)
           test -d packages/ui-react19/build && echo "✓ ui-react19 build exists" || (echo "✗ ui-react19 build missing" && exit 1)
           test -d packages/vite-react18/dist && echo "✓ vite-react18 build exists" || (echo "✗ vite-react18 build missing" && exit 1)

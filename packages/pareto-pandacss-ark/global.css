@@ -1,0 +1,7 @@
+/* https://panda-css.com/docs/installation/nextjs#configure-the-entry-css-with-layers */
+@layer reset, base, tokens, recipes, utilities;
+
+/* Ensure scroll-locked body remains clickable (Ark UI / Zag) */
+body[data-zag-scroll-lock] {
+	pointer-events: auto;
+}
