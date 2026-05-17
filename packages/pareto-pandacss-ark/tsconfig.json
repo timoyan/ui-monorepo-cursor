@@ -23,6 +23,7 @@
 		"app/**/*",
 		"components/**/*",
 		"core/**/*",
+		"server/**/*",
 		"vite.config.ts",
 		"panda.config.ts",
 		"styled-system"
