@@ -1,5 +1,6 @@
 import { Link } from "@paretojs/core";
 import type { PropsWithChildren } from "react";
+import { AppToaster } from "@/components/ui/toast";
 import { css } from "@/styled-system/css";
 import { styled } from "@/styled-system/jsx";
 
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 				</TopBarInner>
 			</TopBar>
 			<main>{children}</main>
+			<AppToaster />
 		</Shell>
 	);
 }

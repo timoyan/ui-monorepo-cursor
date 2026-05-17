@@ -1,6 +1,80 @@
 /* https://panda-css.com/docs/installation/nextjs#configure-the-entry-css-with-layers */
 @layer reset, base, tokens, recipes, utilities;
 
+/* Centralized toast (Ark UI): positioning and visibility */
+[data-scope="toast"][data-part="root"] {
+	translate: var(--x) var(--y);
+	scale: var(--scale);
+	z-index: var(--z-index);
+	height: var(--height);
+	opacity: var(--opacity);
+	will-change: translate, opacity, scale;
+	transition:
+		translate 400ms,
+		scale 400ms,
+		opacity 400ms,
+		height 400ms,
+		box-shadow 200ms;
+	transition-timing-function: cubic-bezier(0.21, 1.02, 0.73, 1);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	border-radius: 8px;
+	padding: 12px 16px;
+	min-width: 200px;
+	max-width: 420px;
+	background: #fff;
+	border: 1px solid #e5e7eb;
+}
+[data-scope="toast"][data-part="root"][data-state="closed"] {
+	transition:
+		translate 400ms,
+		scale 400ms,
+		opacity 200ms;
+	transition-timing-function: cubic-bezier(0.06, 0.71, 0.55, 1);
+}
+[data-scope="toast"][data-part="root"][data-type="error"] {
+	background: #fef2f2;
+	border-color: #fecaca;
+	color: #991b1b;
+}
+[data-scope="toast"][data-part="root"][data-type="success"] {
+	background: #f0fdf4;
+	border-color: #bbf7d0;
+	color: #166534;
+}
+[data-scope="toast"][data-part="root"][data-type="warning"] {
+	background: #fffbeb;
+	border-color: #fde68a;
+	color: #92400e;
+}
+[data-scope="toast"][data-part="root"][data-type="info"] {
+	background: #eff6ff;
+	border-color: #bfdbfe;
+	color: #1e40af;
+}
+[data-scope="toast"][data-part="title"] {
+	font-weight: 600;
+	font-size: 14px;
+}
+[data-scope="toast"][data-part="description"] {
+	font-size: 13px;
+	margin-top: 4px;
+	opacity: 0.9;
+}
+[data-scope="toast"][data-part="close-trigger"] {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 18px;
+	line-height: 1;
+	opacity: 0.6;
+}
+[data-scope="toast"][data-part="close-trigger"]:hover {
+	opacity: 1;
+}
+
 /* Ensure scroll-locked body remains clickable (Ark UI / Zag) */
 body[data-zag-scroll-lock] {
 	pointer-events: auto;

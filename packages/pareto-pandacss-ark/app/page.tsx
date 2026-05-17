@@ -6,6 +6,7 @@ import {
 	AccordionItemContent,
 	AccordionItemTrigger,
 } from "@/components/ui/accordion";
+import { ToastDemo } from "@/components/demo/ToastDemo";
 import { Button } from "@/components/ui/button";
 import { styled } from "@/styled-system/jsx";
 
@@ -85,6 +86,10 @@ export default function HomePage() {
 				<Button variant="primary">Panda button</Button>
 				<Button variant="secondary">Secondary</Button>
 			</Row>
+			<Section>
+				<SectionTitle>Toast (Ark UI + Zag.js registry)</SectionTitle>
+				<ToastDemo />
+			</Section>
 			<Section>
 				<SectionTitle>Ark UI accordion (Panda styled)</SectionTitle>
 				<Accordion id="home-demo-accordion" multiple defaultValue={["a"]}>
