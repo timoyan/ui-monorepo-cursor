@@ -22,8 +22,10 @@
 		"vite-env.d.ts",
 		"app/**/*",
 		"components/**/*",
+		"core/**/*",
 		"vite.config.ts",
 		"panda.config.ts",
 		"styled-system"
-	]
+	],
+	"exclude": ["node_modules", "vitest.config.ts"]
 }
