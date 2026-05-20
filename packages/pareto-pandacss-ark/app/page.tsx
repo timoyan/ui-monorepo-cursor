@@ -1,5 +1,6 @@
 import type { LoaderContext } from "@paretojs/core";
 import { useLoaderData } from "@paretojs/core";
+import { GraphqlQueryDemo } from "@/components/demo/GraphqlQueryDemo";
 import { PersistedStateDemo } from "@/components/demo/PersistedStateDemo";
 import { ToastDemo } from "@/components/demo/ToastDemo";
 import {
@@ -92,6 +93,10 @@ export default function HomePage() {
 					Persisted client state (Zustand + localStorage)
 				</SectionTitle>
 				<PersistedStateDemo />
+			</Section>
+			<Section>
+				<SectionTitle>Server state (GraphQL + TanStack Query)</SectionTitle>
+				<GraphqlQueryDemo />
 			</Section>
 			<Section>
 				<SectionTitle>Toast (Ark UI + Zag.js registry)</SectionTitle>

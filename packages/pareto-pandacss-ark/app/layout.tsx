@@ -1,5 +1,6 @@
 import { Link } from "@paretojs/core";
 import type { PropsWithChildren } from "react";
+import { AppQueryProvider } from "@/components/providers/QueryProvider";
 import { AppToaster } from "@/components/ui/toast";
 import { css } from "@/styled-system/css";
 import { styled } from "@/styled-system/jsx";
@@ -51,19 +52,21 @@ const navLinkClass = css({
 
 export default function RootLayout({ children }: PropsWithChildren) {
 	return (
-		<Shell>
-			<TopBar>
-				<TopBarInner>
-					<Link href="/" className={brandLinkClass}>
-						pareto-pandacss-ark
-					</Link>
-					<Link href="/" className={navLinkClass}>
-						Home
-					</Link>
-				</TopBarInner>
-			</TopBar>
-			<main>{children}</main>
-			<AppToaster />
-		</Shell>
+		<AppQueryProvider>
+			<Shell>
+				<TopBar>
+					<TopBarInner>
+						<Link href="/" className={brandLinkClass}>
+							pareto-pandacss-ark
+						</Link>
+						<Link href="/" className={navLinkClass}>
+							Home
+						</Link>
+					</TopBarInner>
+				</TopBar>
+				<main>{children}</main>
+				<AppToaster />
+			</Shell>
+		</AppQueryProvider>
 	);
 }
