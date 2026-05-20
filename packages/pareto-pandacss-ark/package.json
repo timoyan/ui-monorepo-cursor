@@ -22,15 +22,16 @@
 		"graphql-depth-limit": "^1.1.0",
 		"graphql-yoga": "^5.17.1",
 		"react": "^19.0.0",
-		"react-dom": "^19.0.0"
+		"react-dom": "^19.0.0",
+		"zustand": "^5.0.13"
 	},
 	"devDependencies": {
 		"@pandacss/dev": "^0.52.0",
 		"@testing-library/jest-dom": "^6.1.5",
 		"@testing-library/react": "^14.1.2",
 		"@testing-library/user-event": "^14.5.1",
-		"@types/graphql-depth-limit": "^1.1.6",
 		"@types/express": "^5.0.6",
+		"@types/graphql-depth-limit": "^1.1.6",
 		"@types/node": "^22.0.0",
 		"@types/react": "^19.0.0",
 		"@types/react-dom": "^19.0.0",

@@ -1,12 +1,13 @@
 import type { LoaderContext } from "@paretojs/core";
 import { useLoaderData } from "@paretojs/core";
+import { PersistedStateDemo } from "@/components/demo/PersistedStateDemo";
+import { ToastDemo } from "@/components/demo/ToastDemo";
 import {
 	Accordion,
 	AccordionItem,
 	AccordionItemContent,
 	AccordionItemTrigger,
 } from "@/components/ui/accordion";
-import { ToastDemo } from "@/components/demo/ToastDemo";
 import { Button } from "@/components/ui/button";
 import { styled } from "@/styled-system/jsx";
 
@@ -86,6 +87,12 @@ export default function HomePage() {
 				<Button variant="primary">Panda button</Button>
 				<Button variant="secondary">Secondary</Button>
 			</Row>
+			<Section>
+				<SectionTitle>
+					Persisted client state (Zustand + localStorage)
+				</SectionTitle>
+				<PersistedStateDemo />
+			</Section>
 			<Section>
 				<SectionTitle>Toast (Ark UI + Zag.js registry)</SectionTitle>
 				<ToastDemo />
