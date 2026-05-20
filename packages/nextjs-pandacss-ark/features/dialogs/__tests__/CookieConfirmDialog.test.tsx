@@ -1,4 +1,4 @@
-import { screen } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it } from "vitest";
 import { CookieConfirmDialog } from "@/features/dialogs/CookieConfirmDialog";
@@ -97,9 +97,11 @@ describe("CookieConfirmDialog", () => {
 		});
 		const dialog = screen.getByRole("dialog", { name: /cookie consent/i });
 		dialog.focus();
-		await userEvent.keyboard("{Escape}");
-		expect(store.getState().flow.cookieConfirmResult).toEqual({
-			isAccept: false,
+		fireEvent.keyDown(dialog, { key: "Escape", code: "Escape" });
+		await waitFor(() => {
+			expect(store.getState().flow.cookieConfirmResult).toEqual({
+				isAccept: false,
+			});
 		});
 	});
 });

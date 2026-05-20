@@ -45,7 +45,14 @@ export function CookieConfirmDialog() {
 			<DialogPortal>
 				<DialogBackdrop />
 				<DialogPositioner>
-					<DialogContent>
+					<DialogContent
+						onKeyDown={(event) => {
+							if (event.key === "Escape") {
+								// Keep Escape behavior deterministic in both browser and test env.
+								setCookieConfirm(false);
+							}
+						}}
+					>
 						<DialogTitle>Cookie consent</DialogTitle>
 						<DialogDescription>
 							We use cookies to improve your experience. Do you accept our use
